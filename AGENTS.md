@@ -7,6 +7,7 @@ This repo is a **reference implementation and documentation** for OpenAI Agents 
 - Document verified wiring between the OpenAI Agents SDK and Ollama's OpenAI-compatible API
 - Provide runnable examples and smoke tests for the maintainer's M4 Pro / 24 GB setup
 - Capture model compatibility and troubleshooting knowledge
+- Align with **[MacOS-CAS](https://github.com/WesHacixo/MacOS-CAS)** portfolio docs via [docs/portfolio-integration/macos-cas.md](docs/portfolio-integration/macos-cas.md)
 
 ## Before making changes
 
@@ -34,6 +35,7 @@ After changing defaults, update:
 - `.env.example`
 - `docs/models-macos-m4.md`
 - `docs/verification-log.md`
+- `docs/portfolio-integration/macos-cas.md` (if env vars or joint verify steps change)
 
 ## Documentation rules
 
@@ -61,6 +63,7 @@ uv run agents-ollama-verify
 - Cloud OpenAI API usage (no API key in this repo)
 - Training or fine-tuning Ollama models
 - Fixing broken custom MLX model weights (`bce-*` failures are documented, not patched here)
+- Implementing MacOS-CAS CAS harness apply (document only — see portfolio integration doc)
 
 ## Commit guidance
 

@@ -12,6 +12,7 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | [Examples walkthrough](examples-walkthrough.md) | Annotated tour of `examples/` |
 | [Troubleshooting](troubleshooting.md) | Errors we hit and how to fix them |
 | [Verification log](verification-log.md) | What was tested, when, and on what hardware |
+| [MacOS-CAS integration](portfolio-integration/macos-cas.md) | Sibling Swift host — shared Ollama, API split, joint verify |
 
 ## Quick commands
 

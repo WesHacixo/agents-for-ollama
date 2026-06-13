@@ -33,6 +33,11 @@ uv run python examples/02_tool_calling.py
 | [Examples](docs/examples-walkthrough.md) | Walkthrough of `examples/` |
 | [Troubleshooting](docs/troubleshooting.md) | Common errors and fixes |
 | [Verification log](docs/verification-log.md) | Test record for this hardware |
+| [MacOS-CAS integration](docs/portfolio-integration/macos-cas.md) | Native Mac host — shared Ollama, API split |
+
+## Portfolio context
+
+This repo complements **[MacOS-CAS](https://github.com/WesHacixo/MacOS-CAS)** (native Swift capability host). MacOS-CAS uses Ollama `/api/generate` and `/api/chat`; this repo uses **`/v1/chat/completions`** for OpenAI Agents SDK tool loops. See [docs/portfolio-integration/macos-cas.md](docs/portfolio-integration/macos-cas.md).
 
 ## Project layout
 

@@ -90,3 +90,12 @@ ollama pull llama3.2
 ```
 
 After pulling, run `./scripts/verify_setup.sh` and add a row to [verification-log.md](verification-log.md).
+
+## MacOS-CAS alignment
+
+These defaults are shared with the native Mac host ([MacOS-CAS](https://github.com/WesHacixo/MacOS-CAS)) when both use the same Ollama daemon:
+
+- Set `OLLAMA_MODEL=gemma4:12b-mlx` for harness CLI and Python tool agents.
+- Mac native client uses `OLLAMA_HOST` without `/v1`; this repo uses `OLLAMA_BASE_URL` **with** `/v1`.
+
+Bridge spec: [agents-sdk-ollama-bridge-v0.1.md](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/agents-sdk-ollama-bridge-v0.1.md) (MacOS-CAS) · [macos-cas.md](portfolio-integration/macos-cas.md) (this repo).
