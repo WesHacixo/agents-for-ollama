@@ -46,6 +46,46 @@ If you see HTTP 400 mentioning tools, switch to a model with `tools` in `ollama 
 
 Use this when multiple agents share one Ollama endpoint and you prefer string model names.
 
+## Agentic patterns (`04`–`07`)
+
+See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run all:
+
+```bash
+./scripts/test_patterns.sh
+```
+
+### `04_handoffs.py` — triage handoff
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | Triage → Researcher with `lookup_fact` tool |
+| **Expected** | Answer mentions San Francisco / California |
+
+### `05_agent_as_tool.py` — orchestrator
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | Spanish sub-agent exposed via `as_tool` |
+| **Expected** | Spanish translation of the English phrase |
+
+### `06_session_chat.py` — session memory
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | `SQLiteSession` — pronoun follow-up without re-stating city |
+| **Expected** | Turn 2 answers `California` (or equivalent) |
+
+### `07_structured_output.py` — Pydantic output
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | `output_type=LocalAgentBrief` |
+| **Expected** | Printed `topic` and `summary` (requires `response_format: json_object`) |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
@@ -61,12 +101,14 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-The same Ollama model object can back multiple agents. For handoffs, guardrails, and sessions, see the [OpenAI Agents SDK docs](https://openai.github.io/openai-agents-python/) — no Ollama-specific changes beyond model wiring and tool-capable model selection.
+Handoffs, agent-as-tool, sessions, and structured output are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`07`.
 
 ## Suggested learning order
 
 1. `01_basic_chat.py`
 2. `02_tool_calling.py`
 3. Read [configuration.md](configuration.md)
-4. `03_global_client.py`
-5. `./scripts/verify_setup.sh`
+4. Read [agentic-patterns.md](agentic-patterns.md)
+5. `./scripts/test_patterns.sh` (examples `04`–`07`)
+6. `03_global_client.py`
+7. `./scripts/verify_setup.sh`

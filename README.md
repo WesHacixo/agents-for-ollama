@@ -34,6 +34,7 @@ uv run python examples/02_tool_calling.py
 | [Troubleshooting](docs/troubleshooting.md) | Common errors and fixes |
 | [Verification log](docs/verification-log.md) | Test record for this hardware |
 | [MacOS-CAS integration](docs/portfolio-integration/macos-cas.md) | Native Mac host — shared Ollama, API split |
+| [Agentic patterns](docs/agentic-patterns.md) | Handoffs, orchestrator, sessions, structured output |
 
 ## Portfolio context
 

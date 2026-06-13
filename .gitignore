@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 .env
 .DS_Store
+*.db
+examples/.session_demo.db
 .pytest_cache/
 .ruff_cache/
 dist/

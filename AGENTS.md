@@ -14,6 +14,7 @@ This repo is a **reference implementation and documentation** for OpenAI Agents 
 1. Read [docs/README.md](docs/README.md) for doc structure.
 2. Check [docs/models-macos-m4.md](docs/models-macos-m4.md) before changing default models.
 3. Run `./scripts/verify_setup.sh` after changing client wiring or dependencies.
+4. Run `./scripts/test_patterns.sh` after changing examples `04`–`07` or pattern docs.
 
 ## Code conventions
 

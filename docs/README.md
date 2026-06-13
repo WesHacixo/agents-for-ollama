@@ -13,6 +13,8 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | [Troubleshooting](troubleshooting.md) | Errors we hit and how to fix them |
 | [Verification log](verification-log.md) | What was tested, when, and on what hardware |
 | [MacOS-CAS integration](portfolio-integration/macos-cas.md) | Sibling Swift host — shared Ollama, API split, joint verify |
+| [Agentic patterns](agentic-patterns.md) | Handoffs, agent-as-tool, sessions, structured output on Ollama |
+| [Pattern verification log](pattern-verification-log.md) | Live test results for examples 04–07 |
 
 ## Quick commands
 
