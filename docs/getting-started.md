@@ -40,7 +40,7 @@ See [models-macos-m4.md](models-macos-m4.md) for the full tested matrix.
 ## 3. Clone and install Python deps
 
 ```bash
-cd "/path/to/Agents exploration"
+cd "/path/to/agents-for-ollama"
 uv sync
 ```
 
