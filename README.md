@@ -1,4 +1,4 @@
-# agents-ollama-macos
+# Agents for Ollama
 
 Reference repository for running the **OpenAI Agents SDK** against **Ollama** on **macOS Apple Silicon**.
 

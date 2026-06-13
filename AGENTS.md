@@ -1,4 +1,4 @@
-# Agent instructions — agents-ollama-macos
+# Agent instructions — Agents for Ollama
 
 This repo is a **reference implementation and documentation** for OpenAI Agents SDK + Ollama on macOS Apple Silicon. It is not a production service.
 
