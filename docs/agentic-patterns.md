@@ -191,7 +191,19 @@ await Runner.run(agent, "What state is it in?", session=session)
 
 **Example:** `examples/10_cas_return_stub.py` · [cas-return-bridge.md](cas-return-bridge.md)
 
-**Status:** Proposal-only; default profile `ollama_http_api` (MacOS-CAS manifold); host apply not implemented.
+**Status:** Wired via `python_agents_sdk` profile and `agents-ollama-cas-return` subprocess CLI.
+
+---
+
+## 9. LLM guardrails (classifier agent)
+
+**What:** Use a small local model inside `@input_guardrail` to classify ALLOW vs BLOCK before the main agent runs.
+
+**When:** Heuristic string checks are too brittle; you want semantic injection detection on Ollama.
+
+**Example:** `examples/11_llm_guardrails.py` — classifier on `gemma2:2b`, main agent on `gemma4:12b-mlx`.
+
+**Ollama notes:** Guardrail adds one extra inference per turn; use a fast model for the classifier.
 
 ---
 
@@ -215,7 +227,7 @@ await Runner.run(agent, "What state is it in?", session=session)
 | Tool agent | Python executor; Mac MCP + approvals |
 | Structured output | Proposal payload for CAS validate/apply |
 | Sessions | Python-side continuity vs Membrane chat |
-| Handoffs / orchestrator | Future `local_model` subprocess profile |
+| Handoffs / orchestrator | `python_agents_sdk` subprocess profile |
 
 Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/agents-sdk-ollama-bridge-v0.1.md)
 
@@ -229,7 +241,8 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | 1 | Docs + examples `04`–`07` + `test_patterns.sh` | ✅ Done |
 | 2 | Guardrails + parallel (`08`–`09`) | ✅ Done |
 | 3 | CAS return stub (`10`) + bridge doc | ✅ Done |
-| 4 | MacOS-CAS host apply + `return-validate` CI | Planned |
+| 4 | MacOS-CAS subprocess executor + host apply | ✅ Done |
+| 5 | LLM guardrails example (`11`) | ✅ Done |
 
 ---
 

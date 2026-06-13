@@ -23,6 +23,7 @@ dependencies = [
 [project.scripts]
 agents-ollama-chat = "agents_ollama.cli:chat_main"
 agents-ollama-verify = "agents_ollama.cli:verify_main"
+agents-ollama-cas-return = "agents_ollama.cli:cas_return_main"
 
 [build-system]
 requires = ["hatchling"]

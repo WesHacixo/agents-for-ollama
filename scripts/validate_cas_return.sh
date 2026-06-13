@@ -18,9 +18,10 @@ echo "== Export CAS-1 handoff =="
 PACKET_ID="$(python3 -c "import json; print(json.load(open('$CAS1_JSON'))['packet_id'])")"
 echo "source_packet_id=$PACKET_ID"
 
-echo "== Run agents-for-ollama CAS stub =="
+echo "== Run agents-ollama-cas-return =="
 export CAS_SOURCE_PACKET_ID="$PACKET_ID"
-(cd "$ROOT" && uv run python examples/10_cas_return_stub.py > "$RETURN_JSON")
+export CAS_EXECUTOR_PROFILE_ID="${CAS_EXECUTOR_PROFILE_ID:-python_agents_sdk}"
+(cd "$ROOT" && uv run agents-ollama-cas-return > "$RETURN_JSON")
 
 echo "== MacOS-CAS validate-return-packet =="
 (cd "$MACOS_CAS" && swift run MacOSAppCLI validate-return-packet --input "$RETURN_JSON" --json 2>/dev/null) | tee /dev/stderr | python3 -c "

@@ -1,14 +1,23 @@
-"""CLI entrypoints for chat and environment verification."""
+"""CLI entrypoints for chat, verification, and CAS return subprocess emit."""
 
 from __future__ import annotations
 
+import argparse
 import asyncio
+import os
 import sys
 
 from agents import Runner, function_tool
 
-from agents_ollama.client import (
+from agents_ollama.cas_runner import (
+    DEFAULT_EXECUTOR_PROFILE_ID,
+    DEFAULT_HINT,
     DEFAULT_MODEL,
+    DEFAULT_SOURCE_PACKET_ID,
+    emit_cas_return,
+    run_cas_return,
+)
+from agents_ollama.client import (
     DEFAULT_MODEL_CHAT_ONLY,
     OllamaSettings,
     build_agent,
@@ -73,3 +82,52 @@ def chat_main() -> None:
 
 def verify_main() -> None:
     raise SystemExit(asyncio.run(run_verify()))
+
+
+def cas_return_main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Run a proposal-only agent and emit CASReturnPacket JSON on stdout.",
+    )
+    parser.add_argument(
+        "hint",
+        nargs="?",
+        default=os.getenv("CAS_HINT", DEFAULT_HINT),
+        help="Operator task hint (env: CAS_HINT)",
+    )
+    parser.add_argument(
+        "--source-packet-id",
+        default=os.getenv("CAS_SOURCE_PACKET_ID", DEFAULT_SOURCE_PACKET_ID),
+        help="Governed CAS-1 packet_id (env: CAS_SOURCE_PACKET_ID)",
+    )
+    parser.add_argument(
+        "--model",
+        default=os.getenv("OLLAMA_MODEL", DEFAULT_MODEL),
+        help="Ollama model tag (env: OLLAMA_MODEL)",
+    )
+    parser.add_argument(
+        "--executor-profile-id",
+        default=os.getenv("CAS_EXECUTOR_PROFILE_ID", DEFAULT_EXECUTOR_PROFILE_ID),
+        help="CASReturnPacket executor_profile_id (env: CAS_EXECUTOR_PROFILE_ID)",
+    )
+    parser.add_argument(
+        "--pretty",
+        action="store_true",
+        help="Pretty-print JSON (dev only; subprocess hosts expect compact stdout)",
+    )
+    args = parser.parse_args()
+
+    try:
+        packet = asyncio.run(
+            run_cas_return(
+                hint=args.hint,
+                source_packet_id=args.source_packet_id,
+                model=args.model,
+                executor_profile_id=args.executor_profile_id,
+            )
+        )
+        emit_cas_return(packet, pretty=args.pretty)
+    except SystemExit:
+        raise
+    except Exception as exc:
+        print(f"agents-ollama-cas-return failed: {exc}", file=sys.stderr)
+        raise SystemExit(2) from exc

@@ -17,12 +17,12 @@ def build_cas_return_packet(
     source_packet_id: str = "cas1_python_agents_sdk_stub",
     hint: str = "",
     status: str = "proposed",
-    executor_profile_id: str = "ollama_http_api",
+    executor_profile_id: str = "python_agents_sdk",
 ) -> dict[str, Any]:
     """Build a proposal-only CASReturnPacket compatible with MacOS-CAS v0.1 shape.
 
-    Uses ``ollama_http_api`` by default — the profile registered in MacOS-CAS
-    ``ExecutorManifold``. Logical tag ``python_agents_sdk`` appears in actions_taken.
+    Default profile ``python_agents_sdk`` is registered in MacOS-CAS ``ExecutorManifold``.
+    Use ``ollama_http_api`` for native HTTP rehearsal compatibility.
     """
     summary_action = agent_output.strip().replace("\n", " ")
     if len(summary_action) > 240:

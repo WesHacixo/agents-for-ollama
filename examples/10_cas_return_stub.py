@@ -6,50 +6,22 @@ import asyncio
 import json
 import os
 
-from agents import Agent, ModelSettings, Runner
-
-from agents_ollama import (
-    build_cas_return_packet,
-    build_ollama_model,
-    configure_ollama_runtime,
-    validate_packet_structure,
-)
+from agents_ollama.cas_runner import emit_cas_return, run_cas_return
 
 MODEL = os.getenv("OLLAMA_MODEL", "gemma4:12b-mlx")
 HINT = os.getenv("CAS_HINT", "Summarize next governed harness step for MacOS-CAS")
 SOURCE_PACKET_ID = os.getenv("CAS_SOURCE_PACKET_ID", "cas1_python_agents_sdk_stub")
+EXECUTOR_PROFILE_ID = os.getenv("CAS_EXECUTOR_PROFILE_ID", "python_agents_sdk")
 
 
 async def main() -> None:
-    configure_ollama_runtime()
-    model = build_ollama_model(MODEL)
-
-    agent = Agent(
-        name="CASProposalAgent",
-        instructions=(
-            "You produce proposal-only summaries for a governed Mac agent harness. "
-            "No repo writes, no shell, no truth promotion. Reply in 2-3 sentences."
-        ),
-        model=model,
-        model_settings=ModelSettings(temperature=0.3),
-    )
-
-    result = await Runner.run(
-        agent,
-        f"{HINT} (proposal only, local Ollama).",
-    )
-
-    packet = build_cas_return_packet(
-        agent_output=result.final_output,
+    packet = await run_cas_return(
         hint=HINT,
         source_packet_id=SOURCE_PACKET_ID,
+        model=MODEL,
+        executor_profile_id=EXECUTOR_PROFILE_ID,
     )
-
-    errors = validate_packet_structure(packet)
-    if errors:
-        raise SystemExit(f"Packet structure invalid: {errors}")
-
-    print(json.dumps(packet, indent=2))
+    emit_cas_return(packet, pretty=True)
 
 
 if __name__ == "__main__":

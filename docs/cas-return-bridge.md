@@ -6,19 +6,35 @@ How agent runs in **agents-for-ollama** map to **`CASReturnPacket`** JSON for th
 
 | Item | Status |
 |------|--------|
-| `agents_ollama.cas_return.build_cas_return_packet` | Stub builder |
+| `agents_ollama.cas_return.build_cas_return_packet` | Builder + structural validator |
+| `agents-ollama-cas-return` CLI | Subprocess entry for MacOS-CAS |
 | `examples/10_cas_return_stub.py` | Runnable demo |
-| MacOS-CAS host apply | Not wired — proposal-only |
+| MacOS-CAS `python_agents_sdk` profile | Registered in `ExecutorManifold` |
+| MacOS-CAS host apply | **`python-agents-rehearse-print --live`** + `apply-return` |
+
+## Subprocess CLI (MacOS-CAS spawn target)
+
+```bash
+uv run agents-ollama-cas-return \
+  --source-packet-id "$CAS_SOURCE_PACKET_ID" \
+  "Summarize next governed harness step"
+```
+
+| Stream | Content |
+|--------|---------|
+| stdout | Single compact JSON `CASReturnPacket` |
+| stderr | Progress / errors |
+| exit 0 | Valid packet emitted |
+
+Env: `CAS_HINT`, `CAS_SOURCE_PACKET_ID`, `CAS_EXECUTOR_PROFILE_ID` (default `python_agents_sdk`), `OLLAMA_MODEL`, `OLLAMA_BASE_URL`.
 
 ## Shape
-
-Output matches `cas-return-0_1` fields used in MacOS-CAS operator loop proofs:
 
 ```json
 {
   "object": "CASReturnPacket",
   "schema_version": "cas-return-0_1",
-  "executor_profile_id": "ollama_http_api",
+  "executor_profile_id": "python_agents_sdk",
   "executor_family": "local_model_runtime",
   "executor_lane": "local_model",
   "status": "proposed",
@@ -26,54 +42,42 @@ Output matches `cas-return-0_1` fields used in MacOS-CAS operator loop proofs:
 }
 ```
 
-Reference packet: [MacOS-CAS operator loop proof](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/operations/operator-loop-proof-2026-05-20/03-return-packet.json)
-
-## Run the stub
+## MacOS-CAS operator flow
 
 ```bash
-uv run python examples/10_cas_return_stub.py
-export CAS_HINT="Draft proposal for inference router docs"
-uv run python examples/10_cas_return_stub.py
-```
-
-## Code
-
-```python
-from agents import Runner
-from agents_ollama import build_agent, build_cas_return_packet, configure_ollama_runtime
-
-configure_ollama_runtime()
-result = await Runner.run(build_agent(), "Your task")
-packet = build_cas_return_packet(agent_output=result.final_output, hint="my_task")
-```
-
-## MacOS-CAS validation
-
-**Structural (local):** `validate_packet_structure()` in `agents_ollama/cas_return.py`
-
-**Host accept:** MacOS-CAS `return-validate` / `validate-return-packet` also require
-`source_packet_id` to match the active governed handoff (`cas1-print`). For a full accept path:
-
-```bash
-# One-shot (requires MacOS-CAS checkout)
+# Validate only (Python subprocess → host validator)
 ./scripts/validate_cas_return.sh
 
-# Manual steps
-cd ~/Development/UltraViolet/MacOS-CAS
-swift run MacOSAppCLI cas1-export --output /tmp/cas1.json 2>/dev/null
-export CAS_SOURCE_PACKET_ID=$(python3 -c "import json; print(json.load(open('/tmp/cas1.json'))['packet_id'])")
-cd ~/Development/agents-for-ollama
-uv run python examples/10_cas_return_stub.py > /tmp/agents-sdk-return.json
-cd ~/Development/UltraViolet/MacOS-CAS
-swift run MacOSAppCLI validate-return-packet --input /tmp/agents-sdk-return.json --json 2>/dev/null
+# Live rehearsal + host apply (requires MacOS-CAS checkout)
+./scripts/python_agents_apply_smoke.sh
 ```
 
-Default `executor_profile_id` is **`ollama_http_api`** (registered in MacOS-CAS). The Python SDK path is tagged in `actions_taken` via `classify:python_openai_agents_sdk`.
+Manual MacOS-CAS commands:
 
-Host apply remains **off** until subprocess executor wiring lands.
+```bash
+cd ~/Development/UltraViolet/MacOS-CAS
+export AGENTS_FOR_OLLAMA_ROOT=~/Development/agents-for-ollama
+swift run MacOSAppCLI python-agents-rehearse-print --live --hint "Your task"
+swift run MacOSAppCLI apply-return \
+  --rehearse-first --live --profile python_agents_sdk --hint "Your task" --json
+```
+
+## Library usage
+
+```python
+from agents_ollama.cas_runner import run_cas_return, emit_cas_return
+
+packet = await run_cas_return(
+    hint="my task",
+    source_packet_id="cas1_...",
+    model="gemma4:12b-mlx",
+    executor_profile_id="python_agents_sdk",
+)
+emit_cas_return(packet)
+```
 
 ## Related
 
-- [agentic-patterns.md](../agentic-patterns.md)
-- [portfolio-integration/macos-cas.md](macos-cas.md)
+- [agentic-patterns.md](agentic-patterns.md)
+- [portfolio-integration/macos-cas.md](portfolio-integration/macos-cas.md)
 - [MacOS-CAS bridge spec](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/agents-sdk-ollama-bridge-v0.1.md)

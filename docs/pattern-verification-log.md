@@ -21,7 +21,15 @@ Live runs of `examples/04`–`10` via `./scripts/test_patterns.sh`.
 | `07_structured_output.py` | Structured output | **PASS** | `json_object` + 2-field schema |
 | `08_guardrails.py` | Input guardrail | **PASS** | Tripwire on injection phrase |
 | `09_parallel.py` | Parallel | **PASS** | `sky='Blue'` `grass='Green'` |
-| `10_cas_return_stub.py` | CAS return | **PASS** | Valid JSON; profile `ollama_http_api` |
+| `10_cas_return_stub.py` | CAS return | **PASS** | Profile `python_agents_sdk` |
+| `11_llm_guardrails.py` | LLM guardrail | **PASS** | Classifier `gemma2:2b` tripped injection |
+
+### Phase 4 (MacOS-CAS subprocess)
+
+| Check | Result |
+|-------|--------|
+| `validate_cas_return.sh` | **PASS** — host `accepted=true` |
+| `python_agents_apply_smoke.sh` | **PASS** — `applied=true`, live subprocess |
 
 ### Structured output learnings
 
