@@ -11,6 +11,9 @@ Runnable scripts demonstrating OpenAI Agents SDK + Ollama patterns.
 | [05_agent_as_tool.py](05_agent_as_tool.py) | Orchestrator + `as_tool` | `gemma4:12b-mlx` |
 | [06_session_chat.py](06_session_chat.py) | `SQLiteSession` memory | `gemma4:12b-mlx` |
 | [07_structured_output.py](07_structured_output.py) | Pydantic output | `gemma4:12b-mlx` |
+| [08_guardrails.py](08_guardrails.py) | Input guardrail | `gemma4:12b-mlx` |
+| [09_parallel.py](09_parallel.py) | Parallel runs | `gemma2:2b` (`OLLAMA_PARALLEL_MODEL`) |
+| [10_cas_return_stub.py](10_cas_return_stub.py) | CASReturnPacket stub | `gemma4:12b-mlx` |
 
 Run pattern suite:
 
@@ -18,4 +21,4 @@ Run pattern suite:
 ./scripts/test_patterns.sh
 ```
 
-See [docs/agentic-patterns.md](../docs/agentic-patterns.md) and [docs/examples-walkthrough.md](../docs/examples-walkthrough.md).
+See [docs/agentic-patterns.md](../docs/agentic-patterns.md), [docs/cas-return-bridge.md](../docs/cas-return-bridge.md), and [docs/examples-walkthrough.md](../docs/examples-walkthrough.md).

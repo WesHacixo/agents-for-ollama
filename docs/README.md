@@ -14,7 +14,8 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | [Verification log](verification-log.md) | What was tested, when, and on what hardware |
 | [MacOS-CAS integration](portfolio-integration/macos-cas.md) | Sibling Swift host — shared Ollama, API split, joint verify |
 | [Agentic patterns](agentic-patterns.md) | Handoffs, agent-as-tool, sessions, structured output on Ollama |
-| [Pattern verification log](pattern-verification-log.md) | Live test results for examples 04–07 |
+| [CAS return bridge](cas-return-bridge.md) | CASReturnPacket stub for MacOS-CAS |
+| [Pattern verification log](pattern-verification-log.md) | Live test results for examples 04–10 |
 
 ## Quick commands
 

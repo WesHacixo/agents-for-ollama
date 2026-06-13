@@ -86,11 +86,36 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | `output_type=LocalAgentBrief` |
 | **Expected** | Printed `topic` and `summary` (requires `response_format: json_object`) |
 
+### `08_guardrails.py` — input guardrail
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | Rule-based `@input_guardrail` tripwire |
+| **Expected** | Safe hello; then `Guardrail tripped as expected` |
+
+### `09_parallel.py` — parallel runs
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma2:2b` via `OLLAMA_PARALLEL_MODEL` |
+| Pattern | `asyncio.gather` on two one-word prompts |
+| **Expected** | `sky='...'` and `grass='...'` |
+
+### `10_cas_return_stub.py` — CAS return JSON
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | `build_cas_return_packet()` after agent run |
+| **Expected** | Pretty-printed `CASReturnPacket` JSON |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
 |--------|---------|
 | `client.py` | `OllamaSettings`, `build_ollama_client`, `build_ollama_model`, `build_agent` |
+| `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge stub |
 | `cli.py` | `agents-ollama-chat`, `agents-ollama-verify` entrypoints |
 
 Import in your own code:

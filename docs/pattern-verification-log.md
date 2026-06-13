@@ -1,6 +1,6 @@
 # Pattern verification log
 
-Live runs of `examples/04`–`07` via `./scripts/test_patterns.sh`.
+Live runs of `examples/04`–`10` via `./scripts/test_patterns.sh`.
 
 ## Environment
 
@@ -8,23 +8,32 @@ Live runs of `examples/04`–`07` via `./scripts/test_patterns.sh`.
 |-------|-------|
 | Date | 2026-06-13 |
 | Hardware | Apple M4 Pro, 24 GB RAM |
-| Model | `gemma4:12b-mlx` |
+| Model | `gemma4:12b-mlx` (parallel: `gemma2:2b`) |
 | Command | `./scripts/test_patterns.sh` |
 
 ## Results
 
 | Example | Pattern | Result | Notes |
 |---------|---------|--------|-------|
-| `04_handoffs.py` | Handoffs | **PASS** | Correct bridge answer; may answer without strict handoff/tool use |
-| `05_agent_as_tool.py` | Agent-as-tool | **PASS** | Spanish: `Buenos días, el agente local está trabajando.` |
-| `06_session_chat.py` | Sessions | **PASS** | Turn 1: San Francisco; Turn 2: California |
-| `07_structured_output.py` | Structured output | **PASS** | Requires `response_format: json_object`; minimal 2-field schema |
+| `04_handoffs.py` | Handoffs | **PASS** | Correct bridge answer |
+| `05_agent_as_tool.py` | Agent-as-tool | **PASS** | Spanish translation OK |
+| `06_session_chat.py` | Sessions | **PASS** | San Francisco → California |
+| `07_structured_output.py` | Structured output | **PASS** | `json_object` + 2-field schema |
+| `08_guardrails.py` | Input guardrail | **PASS** | Tripwire on injection phrase |
+| `09_parallel.py` | Parallel | **PASS** | `sky='Blue'` `grass='Green'` |
+| `10_cas_return_stub.py` | CAS return | **PASS** | Valid JSON; profile `ollama_http_api` |
 
 ### Structured output learnings
 
-1. Without `ModelSettings(extra_body={"response_format": {"type": "json_object"}})`, Gemma4 returns markdown.
-2. Enum/literal fields (e.g. `confidence: Literal[...]`) often fail — model may emit `0.95` instead of `"high"`.
-3. Prefer **small string-only schemas** for local models.
+1. Requires `ModelSettings(extra_body={"response_format": {"type": "json_object"}})`.
+2. Avoid enum/literal fields locally — use small string schemas.
+
+### CAS return learnings
+
+1. Default profile **`ollama_http_api`** matches MacOS-CAS `ExecutorManifold`.
+2. Full host **accept** needs `CAS_SOURCE_PACKET_ID` from active `cas1-print` handoff.
+3. Tag Python SDK runs via `classify:python_openai_agents_sdk` in `actions_taken`.
+4. Full host **accept** verified via `./scripts/validate_cas_return.sh` (requires MacOS-CAS checkout).
 
 ## How to re-verify
 

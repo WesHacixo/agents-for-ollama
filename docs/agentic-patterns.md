@@ -30,8 +30,10 @@ Run all pattern examples:
 | Agent-as-tool (orchestrator) | `05_agent_as_tool.py` | ✅ Bounded sub-runs | Yes |
 | Sessions (multi-turn memory) | `06_session_chat.py` | ✅ SDK-side SQLite | Yes |
 | Structured output (Pydantic) | `07_structured_output.py` | ⚠️ Needs `json_object` + small schema | Yes |
-| Guardrails | _(planned `08`)_ | ⚠️ Doubles latency | Not yet |
-| Parallel agents | _(planned `09`)_ | ⚠️ RAM / slow per branch | Not yet |
+| Guardrails (input) | `08_guardrails.py` | ✅ Rule-based | Yes |
+| Parallel agents | `09_parallel.py` | ✅ Use `gemma2:2b` | Yes |
+| CAS return stub | `10_cas_return_stub.py` | ✅ Proposal JSON | Yes |
+| Guardrails (LLM judge) | — | ⚠️ 2× latency | Planned |
 | Voice | — | ❌ Not for local Ollama | Out of scope |
 
 ---
@@ -154,23 +156,42 @@ await Runner.run(agent, "What state is it in?", session=session)
 
 ---
 
-## 6. Guardrails (planned)
+## 6. Guardrails
 
-**What:** Input/output guardrails run auxiliary agent checks before or after the main run.
+**What:** `@input_guardrail` / `@output_guardrail` functions run checks before or after the main agent. Tripwires halt execution (`InputGuardrailTripwireTriggered`).
 
-**Ollama fit:** Works but **2×+ latency** (extra model calls). Reserve for high-stakes flows.
+**When:** Block prompt injection, off-topic input, or invalid output before side effects.
 
-**Planned example:** `08_guardrails.py`
+**Example:** `examples/08_guardrails.py` — rule-based input guardrail (no extra LLM call).
+
+**Ollama notes:**
+
+- Rule-based guardrails are **fast and reliable** locally.
+- LLM-as-judge guardrails work but add **full extra model runs** — use sparingly on MLX.
 
 ---
 
-## 7. Parallel agents (planned)
+## 7. Parallel agents
 
-**What:** `asyncio.gather` on multiple `Runner.run` calls; merge or pick best.
+**What:** `asyncio.gather` on multiple `Runner.run` calls.
 
-**Ollama fit:** Logic is fine; **24 GB RAM** limits concurrent large MLX loads. Prefer parallel **small** tasks or sequential on one loaded model.
+**When:** Independent subtasks (labels, classifiers, multi-field extraction).
 
-**Planned example:** `09_parallel.py`
+**Example:** `examples/09_parallel.py` — uses `gemma2:2b` via `OLLAMA_PARALLEL_MODEL` for speed.
+
+**Ollama notes:** One daemon serializes heavy loads; parallel helps **latency when tasks are small**, not for two 12B cold loads on 24 GB RAM.
+
+---
+
+## 8. CAS return stub (MacOS-CAS bridge)
+
+**What:** Map `Runner.run` output to `CASReturnPacket` JSON via `build_cas_return_packet()`.
+
+**When:** Prototyping Python executor returns for MacOS-CAS validate/apply pipeline.
+
+**Example:** `examples/10_cas_return_stub.py` · [cas-return-bridge.md](cas-return-bridge.md)
+
+**Status:** Proposal-only; default profile `ollama_http_api` (MacOS-CAS manifold); host apply not implemented.
 
 ---
 
@@ -205,9 +226,10 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | Phase | Deliverable | Status |
 |-------|-------------|--------|
 | 0 | Tools (`02`) | ✅ Done |
-| 1 | Docs + examples `04`–`07` + `test_patterns.sh` | 🔄 This doc |
-| 2 | Guardrails + parallel examples | Planned |
-| 3 | CAS return JSON stub + MacOS-CAS executor profile | Planned |
+| 1 | Docs + examples `04`–`07` + `test_patterns.sh` | ✅ Done |
+| 2 | Guardrails + parallel (`08`–`09`) | ✅ Done |
+| 3 | CAS return stub (`10`) + bridge doc | ✅ Done |
+| 4 | MacOS-CAS host apply + `return-validate` CI | Planned |
 
 ---
 
