@@ -33,7 +33,7 @@ Run all pattern examples:
 | Guardrails (input) | `08_guardrails.py` | ✅ Rule-based | Yes |
 | Parallel agents | `09_parallel.py` | ✅ Use `gemma2:2b` | Yes |
 | CAS return stub | `10_cas_return_stub.py` | ✅ Proposal JSON | Yes |
-| Guardrails (LLM judge) | — | ⚠️ 2× latency | Planned |
+| Guardrails (LLM judge) | `11_llm_guardrails.py` | ⚠️ 2× latency | Yes |
 | Voice | — | ❌ Not for local Ollama | Out of scope |
 
 ---
@@ -243,6 +243,7 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | 3 | CAS return stub (`10`) + bridge doc | ✅ Done |
 | 4 | MacOS-CAS subprocess executor + host apply | ✅ Done |
 | 5 | LLM guardrails example (`11`) | ✅ Done |
+| 6+ | Long-horizon checkpoints, SigMem0 recall, Atlas registration | See [agentic-proposal-v0.2.md](agentic-proposal-v0.2.md) |
 
 ---
 

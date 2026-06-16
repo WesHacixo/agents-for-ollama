@@ -17,9 +17,8 @@ Ollama exposes an OpenAI-compatible Chat Completions API. This repo documents th
 
 ```bash
 uv sync
+./scripts/mvp_slice.sh    # self-explaining MVP — taste → agent → CAS proposal
 ./scripts/verify_setup.sh
-uv run python examples/01_basic_chat.py
-uv run python examples/02_tool_calling.py
 ```
 
 ## Documentation

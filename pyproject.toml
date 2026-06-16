@@ -24,6 +24,7 @@ dependencies = [
 agents-ollama-chat = "agents_ollama.cli:chat_main"
 agents-ollama-verify = "agents_ollama.cli:verify_main"
 agents-ollama-cas-return = "agents_ollama.cli:cas_return_main"
+agents-ollama-mvp = "agents_ollama.mvp_slice:main"
 
 [build-system]
 requires = ["hatchling"]

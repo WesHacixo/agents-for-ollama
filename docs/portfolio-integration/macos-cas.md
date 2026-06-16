@@ -69,9 +69,22 @@ swift run MacOSAppCLI operator-loop-proof --json
 | Document model RAM limits for Apple Silicon | **agents-for-ollama** `models-macos-m4.md` |
 | Governed executor rehearsal + host apply | **MacOS-CAS** harness |
 
-## Future: CAS subprocess executor
+## CAS subprocess executor (implemented)
 
-MacOS-CAS may eventually invoke this repo as a **`local_model` executor** that emits `CASReturnPacket` JSON. That is **not implemented** — run Python agents standalone until the bridge spec lands in MacOS-CAS.
+MacOS-CAS invokes this repo via profile **`python_agents_sdk`**:
+
+```bash
+# From agents-for-ollama
+./scripts/python_agents_apply_smoke.sh
+
+# MacOS-CAS direct
+export AGENTS_FOR_OLLAMA_ROOT=~/Development/agents-for-ollama
+swift run MacOSAppCLI python-agents-rehearse-print --live --hint "Your task"
+swift run MacOSAppCLI apply-return \
+  --rehearse-first --live --profile python_agents_sdk --hint "Your task" --json
+```
+
+CLI: `agents-ollama-cas-return` · Details: [cas-return-bridge.md](../cas-return-bridge.md) · Strategy: [agentic-proposal-v0.2.md](../agentic-proposal-v0.2.md)
 
 ## MacOS-CAS doc index (inference + agents)
 

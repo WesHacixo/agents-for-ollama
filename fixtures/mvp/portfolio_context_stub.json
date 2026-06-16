@@ -1,0 +1,22 @@
+{
+  "object": "ContextPackExportV0",
+  "authority_status": "proposal_context_only",
+  "promotion_policy": "no_substrate_auto_write",
+  "evidence_limitations": [
+    "fixture: MVP slice — not live SigMem0; taste without truth promotion"
+  ],
+  "unresolved_threads": [
+    {
+      "summary": "Connect python_agents_sdk executor to morning handoff recall"
+    },
+    {
+      "summary": "Clear Atlas coherence after Mac harness smoke"
+    }
+  ],
+  "suggested_actions": [
+    {
+      "label": "Run one governed proposal from portfolio context"
+    }
+  ],
+  "continuity_context": "Local agent demo on Apple Silicon — proposal-only, no session truth."
+}
