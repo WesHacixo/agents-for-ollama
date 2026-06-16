@@ -6,6 +6,8 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 
 | Doc | What you'll learn |
 |-----|-------------------|
+| **[Building agentic software](building-agentic-software.md)** | **Methodology guide** — taste → propose → validate, adoption levels, design checklist |
+| **[Detached membrane ops pack](detached-membrane-ops-pack.md)** | **Operational pack** — preflight, propose, verify for governed membrane runs |
 | [Getting started](getting-started.md) | Install Ollama, Python deps, first agent run |
 | [Configuration](configuration.md) | Env vars, wiring patterns, SDK settings |
 | [Models on macOS M4](models-macos-m4.md) | Verified model matrix for 24 GB RAM |
@@ -16,7 +18,7 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | [Agentic patterns](agentic-patterns.md) | Handoffs, agent-as-tool, sessions, structured output on Ollama |
 | [Agentic proposal v0.2](agentic-proposal-v0.2.md) | Atlas state, MiMo Code lessons, Phases 6–10 roadmap |
 | [Programmatic intelligence seams](programmatic-intelligence-seams.md) | SigMem0 × Atlas × agentic harness — deep seam map |
-| **MVP slice** | `./scripts/mvp_slice.sh` — self-explaining demo (start here) |
+| **MVP slice** | `./scripts/mvp_slice.sh` — self-explaining demo ([methodology](building-agentic-software.md)) |
 | [CAS return bridge](cas-return-bridge.md) | CASReturnPacket stub for MacOS-CAS |
 | [Pattern verification log](pattern-verification-log.md) | Live test results for examples 04–10 |
 
@@ -25,6 +27,7 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 ```bash
 uv sync
 ./scripts/mvp_slice.sh              # start here — self-explaining value demo
+./scripts/membrane_preflight.sh     # detached membrane readiness gate
 ./scripts/verify_setup.sh
 uv run python examples/01_basic_chat.py
 uv run python examples/02_tool_calling.py

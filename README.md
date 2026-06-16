@@ -18,6 +18,7 @@ Ollama exposes an OpenAI-compatible Chat Completions API. This repo documents th
 ```bash
 uv sync
 ./scripts/mvp_slice.sh    # self-explaining MVP — taste → agent → CAS proposal
+./scripts/membrane_preflight.sh   # detached membrane readiness gate
 ./scripts/verify_setup.sh
 ```
 
@@ -26,6 +27,8 @@ uv sync
 | Guide | Description |
 |-------|-------------|
 | [docs/README.md](docs/README.md) | Documentation index |
+| **[Building agentic software](docs/building-agentic-software.md)** | **Methodology** — governed agents, CAS proposals, portfolio seams |
+| **[Detached membrane ops pack](docs/detached-membrane-ops-pack.md)** | **Agent playbook** — why and how to use preflight/propose/verify |
 | [Getting started](docs/getting-started.md) | Install Ollama, deps, first run |
 | [Configuration](docs/configuration.md) | Env vars and SDK wiring patterns |
 | [Models (macOS M4)](docs/models-macos-m4.md) | Verified model matrix |
@@ -42,9 +45,12 @@ This repo complements **[MacOS-CAS](https://github.com/WesHacixo/MacOS-CAS)** (n
 ## Project layout
 
 ```text
-agents_ollama/          Shared client helpers and CLI
-examples/               Minimal runnable examples (01 → 03)
-docs/                   Reference documentation
+agents_ollama/          Shared client helpers, CAS runner, MVP slice
+examples/               Runnable examples (01 → 11)
+docs/                   Reference + building-agentic-software.md methodology
+scripts/mvp_slice.sh      Self-explaining taste → propose → validate demo
+scripts/membrane_*.sh     Detached membrane preflight/propose/verify ops pack
+scripts/membrane_ops.sh   One-command detached membrane orchestration
 scripts/verify_setup.sh Ollama + SDK smoke test
 .env.example            Environment template
 ```

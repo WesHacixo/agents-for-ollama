@@ -80,6 +80,16 @@ chmod +x scripts/verify_setup.sh
 
 This checks Ollama connectivity and runs chat + tool smoke tests.
 
+## 6. See the governed methodology (recommended)
+
+After basic chat works, run the self-explaining MVP demo:
+
+```bash
+./scripts/mvp_slice.sh --fast
+```
+
+It walks **taste → think → propose → validate** and prints why each step matters. Full guide: [building-agentic-software.md](building-agentic-software.md).
+
 ## What happens under the hood
 
 1. `AsyncOpenAI(base_url="http://localhost:11434/v1", api_key="ollama")` points the OpenAI Python client at Ollama.
@@ -90,6 +100,7 @@ No OpenAI API key is required. Ollama ignores the dummy `api_key` but the SDK re
 
 ## Next steps
 
+- [Building agentic software](building-agentic-software.md) — methodology, adoption levels, design checklist
 - [Configuration](configuration.md) — env vars and alternative wiring
 - [Models on macOS M4](models-macos-m4.md) — which models to use when
 - [Examples walkthrough](examples-walkthrough.md) — learn from the sample scripts

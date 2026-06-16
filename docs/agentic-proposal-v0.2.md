@@ -180,6 +180,7 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 
 ## Related
 
+- [building-agentic-software.md](building-agentic-software.md) — methodology guide for builders
 - [agentic-patterns.md](agentic-patterns.md) — pattern catalog
 - [cas-return-bridge.md](cas-return-bridge.md) — subprocess CLI
 - [portfolio-integration/macos-cas.md](portfolio-integration/macos-cas.md)

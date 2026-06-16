@@ -2,6 +2,8 @@
 
 Annotated tour of the scripts in `examples/`.
 
+For **how to combine** these into governed agentic software (CAS proposals, portfolio seams), see [building-agentic-software.md](building-agentic-software.md).
+
 ## Run any example
 
 ```bash
@@ -110,13 +112,23 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | `build_cas_return_packet()` after agent run |
 | **Expected** | Pretty-printed `CASReturnPacket` JSON |
 
+### `11_llm_guardrails.py` — classifier guardrail
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma2:2b` classifier + `gemma4:12b-mlx` main |
+| Pattern | LLM `@input_guardrail` before main agent |
+| **Expected** | Safe prompt runs; injection tripwire on bad input |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
 |--------|---------|
 | `client.py` | `OllamaSettings`, `build_ollama_client`, `build_ollama_model`, `build_agent` |
-| `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge stub |
-| `cli.py` | `agents-ollama-chat`, `agents-ollama-verify` entrypoints |
+| `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge |
+| `cas_runner.py` | `run_cas_return`, `emit_cas_return` for subprocess CLI |
+| `mvp_slice.py` | Self-explaining taste → propose → validate demo |
+| `cli.py` | `agents-ollama-chat`, `agents-ollama-verify`, `agents-ollama-cas-return` |
 
 Import in your own code:
 
@@ -126,14 +138,15 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-Handoffs, agent-as-tool, sessions, and structured output are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`07`.
+Handoffs, agent-as-tool, sessions, structured output, guardrails, and CAS returns are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`11`.
 
 ## Suggested learning order
 
-1. `01_basic_chat.py`
-2. `02_tool_calling.py`
-3. Read [configuration.md](configuration.md)
-4. Read [agentic-patterns.md](agentic-patterns.md)
-5. `./scripts/test_patterns.sh` (examples `04`–`07`)
-6. `03_global_client.py`
-7. `./scripts/verify_setup.sh`
+1. `./scripts/mvp_slice.sh --fast` — see the full methodology once ([building-agentic-software.md](building-agentic-software.md))
+2. `01_basic_chat.py`
+3. `02_tool_calling.py`
+4. `10_cas_return_stub.py` — proposal envelope
+5. Read [agentic-patterns.md](agentic-patterns.md) and run `./scripts/test_patterns.sh`
+6. Read [configuration.md](configuration.md)
+7. `03_global_client.py` (optional wiring style)
+8. `./scripts/verify_setup.sh`

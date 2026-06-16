@@ -237,6 +237,7 @@ Session B: agent System-1-reads snapshot, continues with rebuild injection
 
 ## Related
 
+- [building-agentic-software.md](building-agentic-software.md) — how to apply this seam map when building features
 - [agentic-proposal-v0.2.md](agentic-proposal-v0.2.md) — phased roadmap  
 - [cas-return-bridge.md](cas-return-bridge.md) — subprocess CLI  
 - SigMem0: `configs/surface_authority_registry.v0.yaml`, `dreaming/`, `cas_morning_handoff.py`  

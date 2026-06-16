@@ -2,7 +2,9 @@
 
 Patterns the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) supports that work (or can work) with **local Ollama** on Apple Silicon — especially **`gemma4:12b-mlx`** on M4 Pro / 24 GB.
 
-**Status:** preliminary — examples `04`–`07` + `scripts/test_patterns.sh`. See [pattern-verification-log.md](pattern-verification-log.md).
+**New to this repo?** Read [building-agentic-software.md](building-agentic-software.md) first for the governed methodology (taste → propose → validate) and adoption levels. This doc is the **pattern catalog** for Level 1+.
+
+**Status:** examples `04`–`11` + `scripts/test_patterns.sh`. See [pattern-verification-log.md](pattern-verification-log.md).
 
 ## Prerequisites
 
@@ -249,6 +251,7 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 
 ## Related
 
+- [Building agentic software](building-agentic-software.md) — methodology and adoption path
 - [Configuration](configuration.md)
 - [Models (macOS M4)](models-macos-m4.md)
 - [Examples walkthrough](examples-walkthrough.md)

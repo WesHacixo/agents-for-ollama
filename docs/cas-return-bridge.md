@@ -78,6 +78,7 @@ emit_cas_return(packet)
 
 ## Related
 
+- [building-agentic-software.md](building-agentic-software.md) — methodology (Level 2 CAS returns)
 - [agentic-patterns.md](agentic-patterns.md)
 - [portfolio-integration/macos-cas.md](portfolio-integration/macos-cas.md)
 - [MacOS-CAS bridge spec](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/agents-sdk-ollama-bridge-v0.1.md)
