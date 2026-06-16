@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PIM0_EVENT_ENVELOPE_V1",
+  "title": "PIM0 Event Envelope V1",
+  "type": "object",
+  "required": [
+    "envelope_version",
+    "envelope_id",
+    "source_repo",
+    "source_object_type",
+    "source_schema_ref",
+    "source_object_ref",
+    "source_hash",
+    "authority_class",
+    "lineage_ref",
+    "policy_version",
+    "mutation_allowed",
+    "observed_at"
+  ],
+  "properties": {
+    "envelope_version": { "const": "PIM0_EVENT_ENVELOPE_V1" },
+    "envelope_id": { "type": "string", "minLength": 1 },
+    "source_repo": { "type": "string", "minLength": 1 },
+    "source_object_type": { "type": "string", "minLength": 1 },
+    "source_schema_ref": { "type": "string", "minLength": 1 },
+    "source_object_ref": { "type": "string", "minLength": 1 },
+    "source_hash": { "type": "string", "minLength": 1 },
+    "authority_class": {
+      "enum": ["advisory", "proposal", "governed", "canonical", "presentation_only"]
+    },
+    "lineage_ref": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "mutation_allowed": { "type": "boolean" },
+    "receipt_ref": { "type": ["string", "null"] },
+    "observed_at": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": true
+}

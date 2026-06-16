@@ -1,0 +1,24 @@
+{
+  "policy_id": "detached-membrane-policy-v1",
+  "required_contracts": [
+    "packages/detached_membrane_sdk/contracts/pim0_event_envelope_v1.json",
+    "packages/detached_membrane_sdk/contracts/proposal_packet_schema.json",
+    "packages/detached_membrane_sdk/contracts/verification_result_schema.json"
+  ],
+  "forbidden_imports": [
+    "from agents_ollama",
+    "import agents_ollama",
+    "from scripts",
+    "import scripts"
+  ],
+  "forbidden_markers": [
+    "service_role",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "session_truth",
+    "promote",
+    "apply-return",
+    "swift run",
+    "MacOSAppCLI",
+    "/v1/turns"
+  ]
+}

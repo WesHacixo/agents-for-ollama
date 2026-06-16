@@ -1,0 +1,15 @@
+{
+  "envelope_version": "PIM0_EVENT_ENVELOPE_V1",
+  "envelope_id": "evt_atlas_001",
+  "source_repo": "Atlas-CAI",
+  "source_object_type": "organizational_state_event_v0",
+  "source_schema_ref": "atlas/contracts/organizational_state_event_v0",
+  "source_object_ref": "ose_2026_06_16_001",
+  "source_hash": "b3:atlas-state-hash-example",
+  "authority_class": "canonical",
+  "lineage_ref": "trace_atlas_20260616_001",
+  "policy_version": "atlas-envelope-policy-v1",
+  "mutation_allowed": false,
+  "receipt_ref": null,
+  "observed_at": "2026-06-16T00:00:00Z"
+}

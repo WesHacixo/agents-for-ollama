@@ -1,0 +1,49 @@
+{
+  "policy_id": "detached-membrane-policy-v1",
+  "description": "Single-source governance policy for detached membrane core.",
+  "forbidden_imports": [
+    "from agents_ollama",
+    "import agents_ollama",
+    "from scripts",
+    "import scripts"
+  ],
+  "forbidden_markers": [
+    "service_role",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "session_truth",
+    "promote",
+    "apply-return",
+    "swift run",
+    "MacOSAppCLI",
+    "/v1/turns"
+  ],
+  "required_contracts": [
+    "packages/detached_membrane_sdk/contracts/pim0_event_envelope_v1.json",
+    "packages/detached_membrane_sdk/contracts/proposal_packet_schema.json",
+    "packages/detached_membrane_sdk/contracts/verification_result_schema.json"
+  ],
+  "schema_assertions": {
+    "pim0_required_fields": [
+      "envelope_version",
+      "envelope_id",
+      "source_repo",
+      "source_object_type",
+      "source_schema_ref",
+      "source_object_ref",
+      "source_hash",
+      "authority_class",
+      "lineage_ref",
+      "policy_version",
+      "mutation_allowed",
+      "observed_at"
+    ],
+    "authority_class_enum": [
+      "advisory",
+      "proposal",
+      "governed",
+      "canonical",
+      "presentation_only"
+    ],
+    "proposal_status_const": "proposed"
+  }
+}

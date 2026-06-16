@@ -1,0 +1,27 @@
+{
+  "policy_id": "detached-membrane-policy-v1",
+  "schema_assertions": {
+    "pim0_required_fields": [
+      "envelope_version",
+      "envelope_id",
+      "source_repo",
+      "source_object_type",
+      "source_schema_ref",
+      "source_object_ref",
+      "source_hash",
+      "authority_class",
+      "lineage_ref",
+      "policy_version",
+      "mutation_allowed",
+      "observed_at"
+    ],
+    "authority_class_enum": [
+      "advisory",
+      "proposal",
+      "governed",
+      "canonical",
+      "presentation_only"
+    ],
+    "proposal_status_const": "proposed"
+  }
+}

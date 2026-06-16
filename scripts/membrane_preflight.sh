@@ -6,6 +6,8 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MACOS_CAS="${MACOS_CAS_ROOT:-$HOME/Development/UltraViolet/MacOS-CAS}"
 SIGMEM0_URL="${SIGMEM0_EXPORT_URL:-http://127.0.0.1:8741/v1/context-pack/export}"
 OUT_JSON="${TMPDIR:-/tmp}/membrane-preflight.json"
+ZTNA_POLICY="${ZTNA_POLICY_PATH:-$ROOT/packages/detached_membrane_sdk/policy/local_ztna_policy_v0.json}"
+ZTNA_OK="false"
 
 require_cmd() {
   local cmd="$1"
@@ -46,6 +48,10 @@ if [[ -d "$MACOS_CAS" ]]; then
   fi
 fi
 
+if [[ -f "$ZTNA_POLICY" ]]; then
+  ZTNA_OK="true"
+fi
+
 python3 - <<PY > "$OUT_JSON"
 import json
 
@@ -57,6 +63,7 @@ result = {
         "sigmem0_context_export": {"ok": "$SIGMEM0_OK" == "true"},
         "macos_cas_root": {"ok": "$MACOS_CAS_OK" == "true"},
         "python_agents_sdk_profile": {"ok": "$PROFILE_OK" == "true"},
+        "ztna_policy": {"ok": "$ZTNA_OK" == "true"},
     },
 }
 
@@ -76,6 +83,11 @@ cat "$OUT_JSON"
 
 if [[ "$OLLAMA_OK" != "true" ]]; then
   echo "FAIL: Ollama API unavailable at http://127.0.0.1:11434" >&2
+  exit 1
+fi
+
+if [[ "$ZTNA_OK" != "true" ]]; then
+  echo "FAIL: local ZTNA policy missing at $ZTNA_POLICY" >&2
   exit 1
 fi
 

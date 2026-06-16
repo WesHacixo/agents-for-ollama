@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "DETACHED_MEMBRANE_PROPOSAL_PACKET",
+  "title": "Detached Membrane Proposal Packet",
+  "type": "object",
+  "required": [
+    "object",
+    "schema_version",
+    "return_id",
+    "source_packet_id",
+    "executor_profile_id",
+    "status",
+    "actions_taken",
+    "artifacts"
+  ],
+  "properties": {
+    "object": { "const": "CASReturnPacket" },
+    "schema_version": { "const": "cas-return-0_1" },
+    "return_id": { "type": "string", "minLength": 1 },
+    "source_packet_id": { "type": "string", "minLength": 1 },
+    "executor_profile_id": { "type": "string", "minLength": 1 },
+    "status": { "const": "proposed" },
+    "actions_taken": { "type": "array", "items": { "type": "string" } },
+    "artifacts": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

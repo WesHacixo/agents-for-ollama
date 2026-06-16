@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "DETACHED_MEMBRANE_VERIFICATION_RESULT",
+  "title": "Detached Membrane Verification Result",
+  "type": "object",
+  "required": [
+    "object",
+    "schema_version",
+    "accepted",
+    "errors",
+    "packet_ref"
+  ],
+  "properties": {
+    "object": { "const": "DetachedMembraneVerificationResult" },
+    "schema_version": { "const": "detached-membrane-verify-0_1" },
+    "accepted": { "type": "boolean" },
+    "errors": { "type": "array", "items": { "type": "string" } },
+    "packet_ref": {
+      "type": "object",
+      "required": [
+        "source_packet_id",
+        "executor_profile_id",
+        "status"
+      ],
+      "properties": {
+        "return_id": { "type": ["string", "null"] },
+        "source_packet_id": { "type": ["string", "null"] },
+        "executor_profile_id": { "type": ["string", "null"] },
+        "status": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
