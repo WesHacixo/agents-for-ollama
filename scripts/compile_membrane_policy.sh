@@ -22,6 +22,7 @@ forbidden_terms = policy.get("forbidden_imports", []) + policy.get("forbidden_ma
 schema_constraints = {
     "policy_id": policy["policy_id"],
     "schema_assertions": policy.get("schema_assertions", {}),
+    "authority_class_requirements": policy.get("authority_class_requirements", {}),
 }
 (gen_dir / "schema_constraints.json").write_text(
     json.dumps(schema_constraints, indent=2), encoding="utf-8"
@@ -32,6 +33,7 @@ verification_assertions = {
     "required_contracts": policy.get("required_contracts", []),
     "forbidden_imports": policy.get("forbidden_imports", []),
     "forbidden_markers": policy.get("forbidden_markers", []),
+    "plane_separation": policy.get("plane_separation", {}),
 }
 (gen_dir / "verification_assertions.json").write_text(
     json.dumps(verification_assertions, indent=2), encoding="utf-8"

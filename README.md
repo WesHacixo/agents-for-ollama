@@ -30,6 +30,7 @@ uv sync
 | **[Building agentic software](docs/building-agentic-software.md)** | **Methodology** — governed agents, CAS proposals, portfolio seams |
 | **[Detached membrane ops pack](docs/detached-membrane-ops-pack.md)** | **Agent playbook** — why and how to use preflight/propose/verify |
 | **[Detached membrane boundary spec](docs/detached-membrane-boundary-spec.md)** | **Extraction boundary** — contracts and portability gates for Wyrm handoff |
+| **[Detached membrane policy adoption](docs/detached-membrane-policy-adoption.md)** | **Policy ubiquity** — atlas-style stamp + local enforcement metadata |
 | [Getting started](docs/getting-started.md) | Install Ollama, deps, first run |
 | [Configuration](docs/configuration.md) | Env vars and SDK wiring patterns |
 | [Models (macOS M4)](docs/models-macos-m4.md) | Verified model matrix |

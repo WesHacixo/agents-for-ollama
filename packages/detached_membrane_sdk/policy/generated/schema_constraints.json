@@ -22,6 +22,14 @@
       "canonical",
       "presentation_only"
     ],
-    "proposal_status_const": "proposed"
+    "proposal_status_const": "proposed",
+    "proposal_requires_lineage": true
+  },
+  "authority_class_requirements": {
+    "proposal_action_required": "proposal",
+    "verify_allowed": [
+      "proposal",
+      "presentation_only"
+    ]
   }
 }

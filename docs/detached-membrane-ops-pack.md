@@ -190,7 +190,7 @@ Useful flags:
 Governance gate (run before extracting or promoting membrane core changes):
 
 ```bash
-./scripts/membrane_quality_gate.sh
+./scripts/membrane_quality_gate.sh --strict-legality
 ```
 
 ---

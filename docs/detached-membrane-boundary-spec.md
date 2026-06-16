@@ -88,7 +88,7 @@ Before lift-out:
 ## Required commands
 
 ```bash
-./scripts/membrane_quality_gate.sh
+./scripts/membrane_quality_gate.sh --strict-legality
 PYTHONPATH=packages/detached_membrane_sdk python3 -m unittest -v tests/test_detached_membrane_sdk.py
 ./scripts/export_detached_membrane.sh
 ```

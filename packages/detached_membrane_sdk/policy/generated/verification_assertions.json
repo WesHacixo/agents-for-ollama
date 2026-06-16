@@ -20,5 +20,16 @@
     "swift run",
     "MacOSAppCLI",
     "/v1/turns"
-  ]
+  ],
+  "plane_separation": {
+    "modeling_plane_only": true,
+    "forbidden_execution_markers": [
+      "os.system(",
+      "subprocess.run(",
+      "Popen(",
+      "requests.post(",
+      "urllib.request.urlopen(",
+      "socket."
+    ]
+  }
 }

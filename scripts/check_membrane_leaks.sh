@@ -41,6 +41,24 @@ if rg -n "$LEAK_PATTERN" "$CORE"; then
   exit 1
 fi
 
+echo "-- plane separation assertion check"
+python3 - <<PY
+import json
+from pathlib import Path
+
+core = Path("$CORE")
+data = json.loads(Path("$ASSERTIONS_JSON").read_text(encoding="utf-8"))
+markers = data.get("plane_separation", {}).get("forbidden_execution_markers", [])
+violations = []
+for py_file in core.glob("*.py"):
+    text = py_file.read_text(encoding="utf-8")
+    for marker in markers:
+        if marker in text:
+            violations.append(f"{py_file}:{marker}")
+if violations:
+    raise SystemExit("FAIL: execution-plane markers detected: " + "; ".join(violations))
+PY
+
 echo "-- contract coverage check"
 python3 - <<PY
 import json

@@ -1,6 +1,21 @@
 {
   "policy_id": "detached-membrane-policy-v1",
   "description": "Single-source governance policy for detached membrane core.",
+  "authority_class_requirements": {
+    "proposal_action_required": "proposal",
+    "verify_allowed": ["proposal", "presentation_only"]
+  },
+  "plane_separation": {
+    "modeling_plane_only": true,
+    "forbidden_execution_markers": [
+      "os.system(",
+      "subprocess.run(",
+      "Popen(",
+      "requests.post(",
+      "urllib.request.urlopen(",
+      "socket."
+    ]
+  },
   "forbidden_imports": [
     "from agents_ollama",
     "import agents_ollama",
@@ -44,6 +59,7 @@
       "canonical",
       "presentation_only"
     ],
-    "proposal_status_const": "proposed"
+    "proposal_status_const": "proposed",
+    "proposal_requires_lineage": true
   }
 }
