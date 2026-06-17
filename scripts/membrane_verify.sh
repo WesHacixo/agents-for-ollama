@@ -104,6 +104,7 @@ bhrt_projection = project_bhrt_packet(
     pim0_envelope=pim0_envelope,
     parent_receipt_id=ztna.get("policy_decision_ref"),
 )
+result["wyrm_trace_ref"] = bhrt_projection.get("wyrm_trace_ref")
 Path("$BHRTPROJ").write_text(json.dumps(bhrt_projection, indent=2), encoding="utf-8")
 Path("${TMPDIR:-/tmp}/detached-membrane-pim0-envelope.json").write_text(
     json.dumps(pim0_envelope, indent=2), encoding="utf-8"

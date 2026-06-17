@@ -11,6 +11,7 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | **[Detached membrane boundary spec](detached-membrane-boundary-spec.md)** | **Extraction rules** — package boundary, contracts, portability gates |
 | **[Detached membrane policy adoption](detached-membrane-policy-adoption.md)** | **Uber-policy stamp** — adoption metadata for Atlas-style policy audits |
 | **[Portfolio state (Bluehand alignment)](portfolio-state-bluehand-alignment.md)** | **Cross-repo state** — Atlas `.dev` + BHRT Wyrm alignment and packet roadmap |
+| **[Public-safe schema slice](public-safe-schema-slice.md)** | **docs.bluehand.dev export** — `public_safe.v1` field allowlist |
 | [Getting started](getting-started.md) | Install Ollama, Python deps, first agent run |
 | [Configuration](configuration.md) | Env vars, wiring patterns, SDK settings |
 | [Models on macOS M4](models-macos-m4.md) | Verified model matrix for 24 GB RAM |

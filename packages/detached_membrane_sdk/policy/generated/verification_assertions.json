@@ -3,7 +3,8 @@
   "required_contracts": [
     "packages/detached_membrane_sdk/contracts/pim0_event_envelope_v1.json",
     "packages/detached_membrane_sdk/contracts/proposal_packet_schema.json",
-    "packages/detached_membrane_sdk/contracts/verification_result_schema.json"
+    "packages/detached_membrane_sdk/contracts/verification_result_schema.json",
+    "packages/detached_membrane_sdk/contracts/public_safe_slice_v0.json"
   ],
   "forbidden_imports": [
     "from agents_ollama",

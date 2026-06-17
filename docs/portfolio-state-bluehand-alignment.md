@@ -86,8 +86,13 @@ To align with Atlas `.dev` + BHRT Wyrm expectations, detached membrane packets n
 | `PIM0_EVENT_ENVELOPE_V1` thin projection | Atlas index-friendly envelope refs |
 | `lane_separation` metadata | docs vs pim0 vs nexus vs wyrm boundaries |
 
+| `wyrm_trace_ref` / `wyrm_trace_refs[]` | BHRT trace corpus linkage (derived from ZTNA decision ref) |
+| `public_safe_slice_v0.json` | docs.bluehand.dev export profile contract |
+| C067 witness fixture | `fixtures/detached_membrane/c067_boundary_witness_v0.json` |
+
 New SDK surfaces:
 
+- `derive_wyrm_trace_ref()` in `bhrt_projection.py`
 - `project_bhrt_packet()` in `bhrt_projection.py`
 - `emit_pim0_from_proposal()` in `pim0_emit.py`
 
@@ -95,18 +100,20 @@ Verify path now emits:
 
 - `/tmp/detached-membrane-bhrt-projection.json`
 - `/tmp/detached-membrane-pim0-envelope.json`
+- `wyrm_trace_ref` on verification result JSON
 
 ---
 
 ## Optimization backlog (next)
 
-| Priority | Enhancement | Why |
-|----------|-------------|-----|
-| P1 | Register `local.python_agents_sdk` lane in SigMem0 executor registry | Lane arbitration parity with `local.ollama` |
-| P1 | Add `wyrm_trace_ref` capture hook post-verify | Receipt chain into BHRT trace corpus |
-| P2 | Publish `public_safe` schema slice to `docs.bluehand.dev` index | Implement-bridge discoverability |
-| P2 | Add C067 witness fixture in `fixtures/detached_membrane/` | Atlas transport-gate compatibility |
-| P3 | Optional `parent_receipt_id` chaining across multi-step membrane ops | Wyrm T1 receipt lineage fidelity |
+| Priority | Enhancement | Status |
+|----------|-------------|--------|
+| P1 | Register `local.python_agents_sdk` lane in SigMem0 executor registry | **Done** (SigMem0 `registry_revision: 3`) |
+| P1 | Add `wyrm_trace_ref` capture hook post-verify | **Done** (`derive_wyrm_trace_ref` + verify output) |
+| P2 | Publish `public_safe` schema slice to `docs.bluehand.dev` index | **Done locally** (`public_safe_slice_v0.json` + doc) |
+| P2 | Add C067 witness fixture in `fixtures/detached_membrane/` | **Done** (`c067_boundary_witness_v0.json`) |
+| P3 | Optional `parent_receipt_id` chaining across multi-step membrane ops | Open |
+| P3 | Atlas sibling registration for agents-for-ollama on docs index | Open |
 
 ---
 

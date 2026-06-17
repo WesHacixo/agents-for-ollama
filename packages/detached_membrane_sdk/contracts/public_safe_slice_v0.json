@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "DETACHED_MEMBRANE_PUBLIC_SAFE_SLICE_V0",
+  "title": "Detached Membrane Public Safe Slice v0",
+  "description": "Fields safe for docs.bluehand.dev export (public_safe.v1 profile).",
+  "type": "object",
+  "properties": {
+    "object": { "enum": ["CASReturnPacket", "BHRTDetachedMembraneProjection", "PIM0_EVENT_ENVELOPE_V1"] },
+    "schema_version": { "type": "string" },
+    "authority_status": { "const": "advisory_only" },
+    "execution_permitted": { "const": false },
+    "status": { "const": "proposed" },
+    "executor_profile_id": { "type": "string" },
+    "source_packet_id": { "type": "string" },
+    "layering_chain": { "type": "array", "items": { "type": "string" } },
+    "lane_separation": { "type": "object" },
+    "envelope_version": { "const": "PIM0_EVENT_ENVELOPE_V1" },
+    "authority_class": {
+      "enum": ["advisory", "proposal", "presentation_only"]
+    }
+  },
+  "additionalProperties": false
+}

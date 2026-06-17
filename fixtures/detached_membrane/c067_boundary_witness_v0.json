@@ -1,0 +1,39 @@
+{
+  "schema_version": "bluehand_c067_boundary_witness_v0",
+  "witness_id": "c067-agents-for-ollama-detached-membrane-2026-06-17",
+  "authority_status": "advisory_only",
+  "execution_permitted": false,
+  "lanes": {
+    "pim0_dmi_ingress": {
+      "host": "pim0.blue-hand.org",
+      "role": "signed_proposal_ingress"
+    },
+    "nexus_advisory_edge": {
+      "hosts": ["api.bluehand.dev", "mcp.bluehand.dev"],
+      "role": "advisory_orientation_mcp"
+    },
+    "agents_for_ollama_executor": {
+      "repo": "agents-for-ollama",
+      "profile": "python_agents_sdk",
+      "role": "local_proposal_emitter_only"
+    }
+  },
+  "symmetry_witnesses": [
+    {
+      "id": "transport.mcp_is_governed_execution_lane",
+      "claim": "MCP remains governed execution transport beneath DMI."
+    },
+    {
+      "id": "dmi.no_direct_tool_execution",
+      "claim": "Detached membrane emits proposals only; host validates and applies."
+    }
+  ],
+  "layering_chain": [
+    "cloudflare_edge",
+    "dmi_membrane_pim0_worker",
+    "mcp_tunnel_transport",
+    "secgate_wyrm_admission",
+    "bhrt_runtime_semantics",
+    "supabase_ledger"
+  ]
+}

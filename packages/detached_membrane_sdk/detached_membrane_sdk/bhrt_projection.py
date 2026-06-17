@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from typing import Any
 
 PROJECTION_SCHEMA_VERSION = "bhrt-projection-0_2"
@@ -14,6 +15,14 @@ DEFAULT_LAYERING_CHAIN = [
     "bhrt_runtime_semantics",
     "supabase_ledger",
 ]
+
+
+def derive_wyrm_trace_ref(policy_decision_ref: str | None) -> str | None:
+    """Derive a stable Wyrm trace ref from a policy decision receipt."""
+    if not policy_decision_ref:
+        return None
+    digest = hashlib.sha256(policy_decision_ref.encode("utf-8")).hexdigest()[:24]
+    return f"wyrm-{digest}"
 
 
 def project_bhrt_packet(
@@ -29,6 +38,11 @@ def project_bhrt_packet(
     ztna_data = ztna or packet.get("ztna", {})
     policy_decision_ref = ztna_data.get("policy_decision_ref")
     accepted = bool((verification or {}).get("accepted", False))
+    trace_refs = wyrm_trace_refs or []
+    if not trace_refs:
+        derived = derive_wyrm_trace_ref(policy_decision_ref)
+        if derived:
+            trace_refs = [derived]
 
     return {
         "object": "BHRTDetachedMembraneProjection",
@@ -59,7 +73,8 @@ def project_bhrt_packet(
         },
         "state_delta_refs": packet.get("artifacts", []),
         "external_lineage_refs": [x for x in [policy_decision_ref] if x],
-        "wyrm_trace_refs": wyrm_trace_refs or [],
+        "wyrm_trace_refs": trace_refs,
+        "wyrm_trace_ref": trace_refs[0] if trace_refs else None,
         "pim0_envelope_ref": (pim0_envelope or {}).get("envelope_id"),
         "receipt": {
             "boundary": "detached_membrane.local",

@@ -7,6 +7,7 @@ from pathlib import Path
 from detached_membrane_sdk import (
     adapt_event_envelope,
     bridge_verification_result,
+    derive_wyrm_trace_ref,
     emit_pim0_from_proposal,
     emit_proposal_packet,
     format_receipt,
@@ -70,6 +71,20 @@ class DetachedMembraneSdkTests(unittest.TestCase):
         self.assertIn("layering_chain", projection)
         self.assertIn("lane_separation", projection)
         self.assertEqual(projection["lineage"]["parent_receipt_id"], "ztna_decision_test")
+        self.assertTrue(projection["wyrm_trace_ref"].startswith("wyrm-"))
+
+    def test_c067_boundary_witness_fixture(self) -> None:
+        witness = json.loads((FIXTURES / "c067_boundary_witness_v0.json").read_text(encoding="utf-8"))
+        self.assertEqual(witness["authority_status"], "advisory_only")
+        self.assertFalse(witness["execution_permitted"])
+        self.assertIn("symmetry_witnesses", witness)
+
+    def test_derive_wyrm_trace_ref(self) -> None:
+        ref = derive_wyrm_trace_ref("ztna_decision_test")
+        self.assertIsNotNone(ref)
+        self.assertTrue(ref.startswith("wyrm-"))
+        self.assertEqual(len(ref), len("wyrm-") + 24)
+        self.assertIsNone(derive_wyrm_trace_ref(None))
 
     def test_emit_pim0_from_proposal(self) -> None:
         packet = emit_proposal_packet(
