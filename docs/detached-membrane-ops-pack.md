@@ -219,3 +219,4 @@ Governance gate (run before extracting or promoting membrane core changes):
 - [programmatic-intelligence-seams.md](programmatic-intelligence-seams.md)
 - [cas-return-bridge.md](cas-return-bridge.md)
 - [portfolio-integration/bis-cp0-pattern-alignment.md](portfolio-integration/bis-cp0-pattern-alignment.md)
+- [portfolio-integration/detached-membrane-governance-ts-architecture.md](portfolio-integration/detached-membrane-governance-ts-architecture.md) · [Epic #1](https://github.com/WesHacixo/agents-for-ollama/issues/1)

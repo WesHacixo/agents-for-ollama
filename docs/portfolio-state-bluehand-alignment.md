@@ -122,6 +122,13 @@ Verify path now emits:
 | P2 | BIS-CP0 pattern alignment (manifest checksums, layered verify) | **Done** (`detached-membrane-manifest.v1.json`, `layered_verify.py`) |
 | P2 | Fixture-only governance e2e (no Ollama / MacOS-CAS) | **Done** (`membrane_governance_e2e.sh`) |
 | — | BIS-CP0 alignment doc | **Done** (`portfolio-integration/bis-cp0-pattern-alignment.md`) |
+| **P1** | TS governance package (`detached-membrane-governance`) | **Planned** — [Epic #1](https://github.com/WesHacixo/agents-for-ollama/issues/1), [Phase A #2](https://github.com/WesHacixo/agents-for-ollama/issues/2) |
+| **P1** | Golden gate fixtures + negative vectors (TDD) | **Planned** — [#7](https://github.com/WesHacixo/agents-for-ollama/issues/7) |
+| **P2** | Bun `membrane:local-gate` replaces bash governance spine | **Planned** — [#3](https://github.com/WesHacixo/agents-for-ollama/issues/3) |
+| **P2** | AST leak gate (replace `rg`) | **Planned** — [#4](https://github.com/WesHacixo/agents-for-ollama/issues/4) |
+| **P2** | Zod contracts + JSON Schema codegen | **Planned** — [#5](https://github.com/WesHacixo/agents-for-ollama/issues/5) |
+| **P3** | ZTNA consolidate to TS canonical | **Planned** — [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
+| **P3** | Optional `agents-ollama-ts` executor lane | **Backlog** — [#6](https://github.com/WesHacixo/agents-for-ollama/issues/6) (founder-triggered) |
 
 ---
 
