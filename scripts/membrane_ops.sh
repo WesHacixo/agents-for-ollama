@@ -9,9 +9,10 @@ PACKET_OUT="${TMPDIR:-/tmp}/detached-membrane-return.json"
 HINT="${CAS_HINT:-Propose the next bounded step for detached membrane intelligence operations.}"
 SOURCE_PACKET_ID="${CAS_SOURCE_PACKET_ID:-}"
 ALLOW_DEGRADED="false"
+CHAIN_RECEIPTS="false"
 
 usage() {
-  echo "Usage: $0 [--hint \"...\"] [--source-packet-id cas1_...] [--out /tmp/file.json] [--allow-degraded]"
+  echo "Usage: $0 [--hint \"...\"] [--source-packet-id cas1_...] [--out /tmp/file.json] [--allow-degraded] [--chain-receipts]"
   echo
   echo "Runs membrane_preflight.sh -> membrane_propose.sh -> membrane_verify.sh"
 }
@@ -32,6 +33,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --allow-degraded)
       ALLOW_DEGRADED="true"
+      shift
+      ;;
+    --chain-receipts)
+      CHAIN_RECEIPTS="true"
       shift
       ;;
     -h|--help)
@@ -71,6 +76,9 @@ fi
 
 echo
 echo "== verify =="
+if [[ "$CHAIN_RECEIPTS" == "true" ]]; then
+  export MEMBRANE_CHAIN_RECEIPTS=true
+fi
 "$ROOT/scripts/membrane_verify.sh" "$PACKET_OUT"
 
 echo

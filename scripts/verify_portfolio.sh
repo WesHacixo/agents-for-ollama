@@ -1,22 +1,39 @@
 #!/usr/bin/env bash
-# Joint portfolio smoke: agents-for-ollama + MacOS-CAS Ollama harness.
+# Portfolio verify loop: membrane gate + unit tests + optional MacOS-CAS smoke.
 set -euo pipefail
 
-AGENTS_REPO="${AGENTS_REPO:-$HOME/Development/agents-for-ollama}"
-CAS_REPO="${CAS_REPO:-$HOME/Development/UltraViolet/MacOS-CAS}"
-export OLLAMA_MODEL="${OLLAMA_MODEL:-gemma4:12b-mlx}"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
 
-echo "== Joint verify (OLLAMA_MODEL=$OLLAMA_MODEL) =="
+MACOS_CAS="${MACOS_CAS_ROOT:-$HOME/Development/UltraViolet/MacOS-CAS}"
+RUN_SMOKE="${PORTFOLIO_VERIFY_SMOKE:-auto}"
+
+echo "== portfolio verify: membrane quality gate =="
+./scripts/membrane_quality_gate.sh --strict-legality
+
 echo
+echo "== portfolio verify: unit tests =="
+PYTHONPATH=packages/detached_membrane_sdk:. uv run python -m unittest discover -s tests -p 'test_*.py' -q
 
-echo ">> agents-for-ollama"
-cd "$AGENTS_REPO"
-./scripts/verify_setup.sh
+should_smoke() {
+  case "$RUN_SMOKE" in
+    true|1|yes) return 0 ;;
+    false|0|no) return 1 ;;
+    auto)
+      [[ -d "$MACOS_CAS" ]] && curl -sf http://localhost:11434/api/tags >/dev/null 2>&1
+      ;;
+    *) return 1 ;;
+  esac
+}
+
+if should_smoke; then
+  echo
+  echo "== portfolio verify: python_agents_apply_smoke =="
+  ./scripts/python_agents_apply_smoke.sh
+else
+  echo
+  echo "SKIP: MacOS-CAS live smoke (set PORTFOLIO_VERIFY_SMOKE=true or start Ollama + MacOS-CAS)"
+fi
+
 echo
-
-echo ">> MacOS-CAS operator-loop-proof"
-cd "$CAS_REPO"
-swift run MacOSAppCLI operator-loop-proof --json
-echo
-
-echo "Joint verification complete."
+echo "PASS: portfolio verify loop complete."

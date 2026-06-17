@@ -6,7 +6,7 @@ from agents_ollama.checkpoint import (
     build_checkpoint_cas_return,
     write_session_checkpoint,
 )
-from agents_ollama.sigmem0_recall import recall_sigmem0_context
+from agents_ollama.goal_verify import GoalVerdict, parse_goal_verdict_line, verify_goal
 from agents_ollama.client import (
     OllamaSettings,
     build_agent,
@@ -23,6 +23,9 @@ __all__ = [
     "build_ollama_client",
     "build_ollama_model",
     "configure_ollama_runtime",
+    "GoalVerdict",
+    "parse_goal_verdict_line",
+    "verify_goal",
     "new_return_id",
     "recall_sigmem0_context",
     "SessionCheckpoint",

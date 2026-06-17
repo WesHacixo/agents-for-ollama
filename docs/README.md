@@ -19,6 +19,7 @@ Reference guides for running the [OpenAI Agents SDK](https://github.com/openai/o
 | [Troubleshooting](troubleshooting.md) | Errors we hit and how to fix them |
 | [Verification log](verification-log.md) | What was tested, when, and on what hardware |
 | [MacOS-CAS integration](portfolio-integration/macos-cas.md) | Sibling Swift host — shared Ollama, API split, joint verify |
+| [Atlas sibling registration](portfolio-integration/atlas-sibling-registration.md) | Index fixture + promotion checklist for portfolio spine |
 | [Agentic patterns](agentic-patterns.md) | Handoffs, agent-as-tool, sessions, structured output on Ollama |
 | [Agentic proposal v0.2](agentic-proposal-v0.2.md) | Atlas state, MiMo Code lessons, Phases 6–10 roadmap |
 | [Programmatic intelligence seams](programmatic-intelligence-seams.md) | SigMem0 × Atlas × agentic harness — deep seam map |

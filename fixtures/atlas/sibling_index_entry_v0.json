@@ -1,0 +1,34 @@
+{
+  "object": "AtlasSiblingIndexEntryV0",
+  "schema_version": "atlas-sibling-index-v0",
+  "authority_status": "projection_not_truth",
+  "repo": {
+    "name": "agents-for-ollama",
+    "repository_full_name": "WesHacixo/agents-for-ollama",
+    "role": "sibling_executor_reference",
+    "default_branch": "main"
+  },
+  "bridge_objects": {
+    "produces": ["cas_return_packet_v0_1"],
+    "consumes": ["sigmem0_context_pack_export_v0", "macos_cas_handoff_v0"]
+  },
+  "critical_paths": [
+    {
+      "id": "sigmem0_s3_to_mac_m4_1",
+      "posture": "wired_read_only"
+    }
+  ],
+  "verify_commands": [
+    "./scripts/membrane_quality_gate.sh --strict-legality",
+    "./scripts/verify_portfolio.sh"
+  ],
+  "public_safe_artifacts": [
+    "packages/detached_membrane_sdk/contracts/public_safe_slice_v0.json",
+    "docs/public-safe-schema-slice.md"
+  ],
+  "must_not_do": [
+    "silently_promote_memory",
+    "mutate_canonical_supabase",
+    "claim_execution_authority"
+  ]
+}

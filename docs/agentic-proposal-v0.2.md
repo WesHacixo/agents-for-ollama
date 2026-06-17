@@ -131,7 +131,7 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 1. **Goal guard** — before `build_cas_return_packet`, a fast model answers: “Is the operator hint satisfied? YES/NO + gap.”
 2. **Max Mode lite** — `asyncio.gather` 3 candidates on `gemma2:2b`, judge with `gemma4:12b-mlx`, pick one (pattern from MiMo, scaled down for 24 GB RAM).
 
-**Success:** Example `13_goal_verify.py`; measurable reduction in incomplete CAS returns in smoke script.
+**Success:** Example `14_goal_verify.py`; measurable reduction in incomplete CAS returns in smoke script.
 
 ### Phase 9 — Atlas + harness registration
 
@@ -173,8 +173,10 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 | P0 | Reconcile Atlas: `make compile-atlas && make validate` in Atlas-CAI | Portfolio ops |
 | P0 | Commit/push dirty BHOK/SigMem0/BHRT worktrees or refresh capsule | Portfolio ops |
 | P1 | Implement Phase 6 checkpoint writer example | **Done** (`12_session_checkpoint.py`, `agents_ollama/checkpoint.py`) |
-| P1 | Register agents-for-ollama in BHOK ATLAS sibling table | BHOK docs |
+| P1 | Register agents-for-ollama in BHOK ATLAS sibling table | **Done locally** (see atlas-sibling-registration.md) |
 | P2 | SigMem0 recall tool (Phase 7) behind fixture gate | **Done** (`13_sigmem0_recall_agent.py`) |
+| P2 | Phase 8 goal verification | **Done** (`14_goal_verify.py`) |
+| P2 | Portfolio verify loop | **Done** (`verify_portfolio.sh`) |
 
 ---
 

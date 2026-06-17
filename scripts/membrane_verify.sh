@@ -38,6 +38,14 @@ from pathlib import Path
 sys.path.insert(0, "$ROOT/packages/detached_membrane_sdk")
 from detached_membrane_sdk.bhrt_projection import project_bhrt_packet
 from detached_membrane_sdk.pim0_emit import emit_pim0_from_proposal
+from detached_membrane_sdk.receipt_chain import (
+    append_receipt_link,
+    chain_enabled,
+    default_chain_path,
+    load_receipt_chain,
+    resolve_parent_receipt_id,
+    save_receipt_chain,
+)
 import subprocess
 
 ack = json.loads(Path("$ACK_JSON").read_text(encoding="utf-8"))
@@ -97,14 +105,32 @@ result = {
 print(json.dumps(result, indent=2))
 
 pim0_envelope = emit_pim0_from_proposal(packet=packet)
+chain = load_receipt_chain() if chain_enabled() else None
+parent_receipt_id = resolve_parent_receipt_id(
+    chain=chain,
+    fallback=ztna.get("policy_decision_ref"),
+    enabled=chain_enabled(),
+)
 bhrt_projection = project_bhrt_packet(
     packet=packet,
     verification=result,
     ztna=ztna,
     pim0_envelope=pim0_envelope,
-    parent_receipt_id=ztna.get("policy_decision_ref"),
+    parent_receipt_id=parent_receipt_id,
 )
 result["wyrm_trace_ref"] = bhrt_projection.get("wyrm_trace_ref")
+result["parent_receipt_id"] = parent_receipt_id
+if chain_enabled():
+    updated = append_receipt_link(
+        chain or load_receipt_chain(),
+        source_packet_id=packet.get("source_packet_id"),
+        return_id=packet.get("return_id"),
+        policy_decision_ref=ztna.get("policy_decision_ref"),
+        wyrm_trace_ref=bhrt_projection.get("wyrm_trace_ref"),
+    )
+    chain_path = save_receipt_chain(updated)
+    result["receipt_chain_path"] = str(chain_path)
+    result["receipt_chain_depth"] = len(updated.get("links") or [])
 Path("$BHRTPROJ").write_text(json.dumps(bhrt_projection, indent=2), encoding="utf-8")
 Path("${TMPDIR:-/tmp}/detached-membrane-pim0-envelope.json").write_text(
     json.dumps(pim0_envelope, indent=2), encoding="utf-8"

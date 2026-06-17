@@ -86,6 +86,34 @@ class DetachedMembraneSdkTests(unittest.TestCase):
         self.assertEqual(len(ref), len("wyrm-") + 24)
         self.assertIsNone(derive_wyrm_trace_ref(None))
 
+    def test_receipt_chain_parent_resolution(self) -> None:
+        from detached_membrane_sdk.receipt_chain import (
+            append_receipt_link,
+            load_receipt_chain,
+            resolve_parent_receipt_id,
+        )
+
+        chain = load_receipt_chain()
+        chain = append_receipt_link(
+            chain,
+            source_packet_id="cas1_a",
+            return_id="ret_a",
+            policy_decision_ref="ztna_a",
+            wyrm_trace_ref="wyrm-aaa",
+        )
+        parent = resolve_parent_receipt_id(chain=chain, fallback="ztna_b", enabled=True)
+        self.assertEqual(parent, "wyrm-aaa")
+        chain = append_receipt_link(
+            chain,
+            source_packet_id="cas1_b",
+            return_id="ret_b",
+            policy_decision_ref="ztna_b",
+            wyrm_trace_ref="wyrm-bbb",
+        )
+        parent = resolve_parent_receipt_id(chain=chain, fallback=None, enabled=True)
+        self.assertEqual(parent, "wyrm-bbb")
+        self.assertEqual(resolve_parent_receipt_id(chain=chain, fallback="x", enabled=False), "x")
+
     def test_emit_pim0_from_proposal(self) -> None:
         packet = emit_proposal_packet(
             source_packet_id="cas1_example_005",

@@ -136,6 +136,14 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | `@function_tool recall_sigmem0` → live export or fixture (`wired_read_only`) |
 | **Expected** | Answer grounded in recall lines; fixture works when `:8741` is down |
 
+### `14_goal_verify.py` — goal guard before CAS return (Phase 8)
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma2:2b` verifier + `gemma4:12b-mlx` worker |
+| Pattern | Fast-model YES/NO on hint satisfaction before `build_cas_return_packet` |
+| **Expected** | CAS JSON only when goal satisfied; exit 2 on gap |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
@@ -144,6 +152,7 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge |
 | `checkpoint.py` | `write_session_checkpoint`, `build_checkpoint_cas_return` (Phase 6) |
 | `sigmem0_recall.py` | `recall_sigmem0_context` — read-only recall with fixture fallback (Phase 7) |
+| `goal_verify.py` | `verify_goal` — fast-model goal guard before CAS emit (Phase 8) |
 | `cas_runner.py` | `run_cas_return`, `emit_cas_return` for subprocess CLI |
 | `mvp_slice.py` | Self-explaining taste → propose → validate demo |
 | `cli.py` | `agents-ollama-chat`, `agents-ollama-verify`, `agents-ollama-cas-return` |
@@ -156,7 +165,7 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, session checkpoints, and SigMem0 recall are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`13`.
+Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, session checkpoints, SigMem0 recall, and goal verification are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`14`.
 
 ## Suggested learning order
 

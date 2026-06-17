@@ -179,11 +179,13 @@ Or run the one-command orchestrator:
 
 ```bash
 ./scripts/membrane_ops.sh --hint "Propose next detached membrane integration step"
+./scripts/membrane_ops.sh --chain-receipts --hint "Step two with receipt lineage"
 ```
 
 Useful flags:
 
 - `--allow-degraded` to continue when preflight returns degraded (`exit 2`)
+- `--chain-receipts` to thread `parent_receipt_id` across verify steps via receipt chain file
 - `--source-packet-id` to pin lineage explicitly
 - `--out` to control packet output path
 
