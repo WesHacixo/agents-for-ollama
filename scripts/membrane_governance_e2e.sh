@@ -20,6 +20,6 @@ echo "-- leak gate"
 ./scripts/check_membrane_leaks.sh
 
 echo "-- fixture governance loop"
-PYTHONPATH=packages/detached_membrane_sdk python3 "$ROOT/packages/detached_membrane_sdk/detached_membrane_sdk/governance_e2e.py"
+PYTHONPATH=packages/detached_membrane_sdk python3 -c "from detached_membrane_sdk.governance_e2e import main; raise SystemExit(main())"
 
 echo "PASS: membrane governance e2e complete."

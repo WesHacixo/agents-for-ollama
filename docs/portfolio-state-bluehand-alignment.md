@@ -119,6 +119,9 @@ Verify path now emits:
 | — | Portfolio verify loop (`verify_portfolio.sh`) | **Done** |
 | — | Atlas portfolio digest (`atlas_portfolio_digest.sh`) | **Done** |
 | — | Phase 10 cloud lane comparison doc | **Done** (`cloud-lane-comparison.md`) |
+| P2 | BIS-CP0 pattern alignment (manifest checksums, layered verify) | **Done** (`detached-membrane-manifest.v1.json`, `layered_verify.py`) |
+| P2 | Fixture-only governance e2e (no Ollama / MacOS-CAS) | **Done** (`membrane_governance_e2e.sh`) |
+| — | BIS-CP0 alignment doc | **Done** (`portfolio-integration/bis-cp0-pattern-alignment.md`) |
 
 ---
 
@@ -126,6 +129,8 @@ Verify path now emits:
 
 ```bash
 ./scripts/membrane_quality_gate.sh --strict-legality
+./scripts/membrane_governance_e2e.sh          # fixture-only governance loop
+./scripts/verify_portfolio.sh                 # gate + e2e + unit tests + optional smoke
 ./scripts/membrane_ops.sh --allow-degraded   # when Ollama/Mac host available
 ```
 
