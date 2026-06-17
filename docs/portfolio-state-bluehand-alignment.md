@@ -125,7 +125,7 @@ Verify path now emits:
 | **P1** | TS governance package (`detached-membrane-governance`) | **Done (Phase A)** — `packages/detached-membrane-governance`, `./scripts/membrane_ts_validate.sh` |
 | **P1** | Golden gate fixtures + negative vectors (TDD) | **Done** — [#7](https://github.com/WesHacixo/agents-for-ollama/issues/7) |
 | **P2** | Bun `membrane:local-gate` replaces bash governance spine | **Done** — [#3](https://github.com/WesHacixo/agents-for-ollama/issues/3) `./scripts/membrane_local_gate.sh` |
-| **P2** | AST leak gate (replace `rg`) | **Planned** — [#4](https://github.com/WesHacixo/agents-for-ollama/issues/4) |
+| **P2** | AST leak gate (replace `rg`) | **Done** — [#4](https://github.com/WesHacixo/agents-for-ollama/issues/4) `membrane:leak-gate` + `leak_ast_scan.py` |
 | **P2** | Zod contracts + JSON Schema codegen | **Planned** — [#5](https://github.com/WesHacixo/agents-for-ollama/issues/5) |
 | **P3** | ZTNA consolidate to TS canonical | **Done (Phase B)** — local gate uses TS ZTNA; `ztna_decide_local.py` legacy [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
 | **P2** | Portfolio digest TS CLI | **Done** — [#9](https://github.com/WesHacixo/agents-for-ollama/issues/9) `membrane:portfolio-digest` |

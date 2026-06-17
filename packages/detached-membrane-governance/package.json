@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "membrane:validate": "bun run typecheck && bun run test",
     "membrane:local-gate": "bun src/cli.ts local-gate",
+    "membrane:leak-gate": "bun src/cli.ts leak-gate",
     "membrane:compile-policy": "bun src/cli.ts compile-policy",
     "membrane:verify-manifest": "bun src/cli.ts verify-manifest",
     "membrane:refresh-manifest": "bun src/cli.ts refresh-manifest",

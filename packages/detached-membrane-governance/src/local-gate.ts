@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { runGovernanceE2e } from "./e2e/governance-e2e.ts";
+import { runLeakAstGate } from "./gates/leak-ast.ts";
 import { verifyStrictLegality } from "./gates/strict-legality.ts";
 import { verifyManifest } from "./manifest/index.ts";
 import { compilePolicy, verifyPolicyAssertions } from "./policy/index.ts";
@@ -24,17 +25,6 @@ function isQuick(): boolean {
 function runStep(label: string, fn: () => void): void {
   process.stdout.write(`-- ${label}\n`);
   fn();
-}
-
-function runShell(label: string, scriptRel: string, root: string): void {
-  process.stdout.write(`-- ${label}\n`);
-  const proc = spawnSync("bash", [join(root, scriptRel)], {
-    cwd: root,
-    stdio: "inherit",
-  });
-  if (proc.status !== 0) {
-    throw new Error(`FAIL: ${label}`);
-  }
 }
 
 function runPythonSdkTests(root: string): void {
@@ -121,7 +111,10 @@ export function runLocalGate(options: LocalGateOptions = {}): void {
     console.log("PASS: membrane manifest checksums verified");
   });
 
-  runShell("leak gate", "scripts/check_membrane_leaks.sh", root);
+  runStep("leak gate (AST)", () => {
+    const result = runLeakAstGate(root);
+    if (!result.ok) throw new Error(result.message);
+  });
 
   runStep("local ztna gate", () => runZtnaGate(root));
 

@@ -3,6 +3,7 @@ import { verifyManifest, refreshDeclaredChecksum } from "./manifest/index.ts";
 import { runGovernanceE2e } from "./e2e/governance-e2e.ts";
 import { issueReceipt, verifyReceipt } from "./ztna/local.ts";
 import { runLocalGate } from "./local-gate.ts";
+import { runLeakAstGate } from "./gates/leak-ast.ts";
 import { buildPortfolioDigest } from "./cli/portfolio-digest.ts";
 import { MANIFEST_REL, REPO_ROOT, ZTNA_POLICY_REL } from "./paths.ts";
 import { join } from "node:path";
@@ -14,6 +15,7 @@ function usage(): never {
 
 Commands:
   local-gate [--strict-legality]
+  leak-gate
   compile-policy
   verify-manifest
   refresh-manifest
@@ -47,6 +49,10 @@ async function main(): Promise<number> {
   if (!cmd) usage();
 
   switch (cmd) {
+    case "leak-gate": {
+      const result = runLeakAstGate(REPO_ROOT);
+      return result.ok ? 0 : 1;
+    }
     case "local-gate": {
       const flags = parseFlags(rest);
       try {

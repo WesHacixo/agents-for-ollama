@@ -119,7 +119,7 @@ Filter: [governance-ts issues](https://github.com/WesHacixo/agents-for-ollama/is
 
 - [x] Phase A: `packages/detached-membrane-governance` with `bun run membrane:validate` (11 tests)
 - [x] Phase B: `bun run membrane:local-gate` / `./scripts/membrane_local_gate.sh` in `verify_portfolio.sh`
-- [ ] `bun run membrane:local-gate` fully replaces legacy bash verify scripts in all docs paths
+- [x] Phase C: AST leak gate (`membrane:leak-gate`) replaces `rg` in local gate
 - [ ] Python SDK leak gate still passes; no `subprocess` / execution markers in extractable core
 - [ ] Single ZTNA implementation; shell scripts call TS CLI
 - [ ] Layered verify has ≥5 negative fixtures (one per layer minimum)

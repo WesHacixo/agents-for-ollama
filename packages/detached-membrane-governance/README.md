@@ -11,6 +11,7 @@ From this directory:
 ```bash
 bun install
 bun run membrane:local-gate              # canonical governance gate (from repo: ./scripts/membrane_local_gate.sh)
+bun run membrane:leak-gate               # AST leak scan only
 bun run membrane:local-gate --strict-legality
 MEMBRANE_GATE_QUICK=1 bun run membrane:local-gate   # skip e2e + python sdk tests
 bun run membrane:validate          # typecheck + vitest

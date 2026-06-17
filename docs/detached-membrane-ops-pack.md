@@ -172,6 +172,16 @@ Upgrade applied:
 
 **Benefit:** one canonical governance truth path aligned with BIS-CP0 `local:gate`.
 
+### Loop 7 — from `rg` leak grep to AST leak gate (Phase C)
+
+Upgrade applied:
+
+- `src/gates/leak-ast.ts` + `leak_ast_scan.py` — Python `ast` walk for imports, execution calls, and markers
+- `bun run membrane:leak-gate` / `./scripts/check_membrane_leaks.sh`
+- Negative fixtures under `fixtures/leak_ast/` with vitest coverage
+
+**Benefit:** structured violations `{ file, line, rule_id, snippet }` instead of brittle substring grep.
+
 ---
 
 ## How your primary coding agent should reason
