@@ -23,7 +23,7 @@ Orientation slice for **docs.bluehand.dev** / Atlas bridge indexing — not exec
 | **Consumes** | SigMem0 context-pack export | `GET /v1/context-pack/export` (taste only) |
 | **Consumes** | MacOS-CAS handoff | `CAS_SOURCE_PACKET_ID` host validation |
 
-Atlas already registers `cas_return_packet_v0_1` with consumers `sigmem0`, `bhok`, `bhrt_0`. This repo is an additional **producer lane** for that envelope.
+Atlas already registers `cas_return_packet_v0_1` with consumers `sigmem0`, `bhok`, `bhrt_0`. This repo is an additional **producer lane** via `python_agents_sdk_cas_return_v0` (Atlas `bridge-objects.yaml`, 2026-06-17).
 
 ## Machine index fixture
 

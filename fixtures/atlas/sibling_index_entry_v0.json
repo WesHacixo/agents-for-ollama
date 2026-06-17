@@ -9,7 +9,7 @@
     "default_branch": "main"
   },
   "bridge_objects": {
-    "produces": ["cas_return_packet_v0_1"],
+    "produces": ["cas_return_packet_v0_1", "python_agents_sdk_cas_return_v0"],
     "consumes": ["sigmem0_context_pack_export_v0", "macos_cas_handoff_v0"]
   },
   "critical_paths": [

@@ -34,5 +34,6 @@ run_example "11_llm_guardrails"
 run_example "12_session_checkpoint"
 run_example "13_sigmem0_recall_agent"
 run_example "14_goal_verify"
+run_example "15_max_mode_lite"
 
 echo "All pattern examples completed."

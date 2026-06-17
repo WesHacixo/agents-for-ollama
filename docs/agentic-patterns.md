@@ -248,7 +248,8 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | 6 | Long-horizon session checkpoint | `12_session_checkpoint.py`, `agents_ollama/checkpoint.py` | **Shipped** (proposal-only CAS checkpoint) |
 | 7 | SigMem0 recall tool | `13_sigmem0_recall_agent.py`, `agents_ollama/sigmem0_recall.py` | **Shipped** (fixture fallback, `wired_read_only`) |
 | 8 | Goal verification guard | `14_goal_verify.py`, `agents_ollama/goal_verify.py` | **Shipped** (fast-model YES/NO before CAS emit) |
-| 9+ | Atlas spine promotion, Max Mode lite | See [agentic-proposal-v0.2.md](agentic-proposal-v0.2.md) |
+| 8b | Max Mode lite | `15_max_mode_lite.py`, `agents_ollama/max_mode_lite.py` | **Shipped** (3×2B candidates + 12B judge) |
+| 9 | Atlas + harness registration | Atlas bridge + BHOK ATLAS + digest script | **Shipped locally** |
 
 ---
 

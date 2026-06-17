@@ -145,6 +145,8 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 
 **Success:** Atlas coherence node for agents-for-ollama; no new truth-write surfaces.
 
+**Status (2026-06-17):** `python_agents_sdk_cas_return_v0` bridge object + machine-state seam registered in Atlas-CAI; BHOK `ATLAS.md` sibling executor table; `./scripts/atlas_portfolio_digest.sh` for orientation JSON.
+
 ### Phase 10 — Optional cloud lane (MiMo-V2.5)
 
 **Out of scope for Ollama-only repo** but worth a **comparison doc**:
@@ -173,10 +175,11 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 | P0 | Reconcile Atlas: `make compile-atlas && make validate` in Atlas-CAI | Portfolio ops |
 | P0 | Commit/push dirty BHOK/SigMem0/BHRT worktrees or refresh capsule | Portfolio ops |
 | P1 | Implement Phase 6 checkpoint writer example | **Done** (`12_session_checkpoint.py`, `agents_ollama/checkpoint.py`) |
-| P1 | Register agents-for-ollama in BHOK ATLAS sibling table | **Done locally** (see atlas-sibling-registration.md) |
+| P1 | Register agents-for-ollama in BHOK ATLAS sibling table | **Done** (BHOK ATLAS.md + Atlas yaml) |
 | P2 | SigMem0 recall tool (Phase 7) behind fixture gate | **Done** (`13_sigmem0_recall_agent.py`) |
 | P2 | Phase 8 goal verification | **Done** (`14_goal_verify.py`) |
-| P2 | Portfolio verify loop | **Done** (`verify_portfolio.sh`) |
+| P2 | Phase 8 Max Mode lite | **Done** (`15_max_mode_lite.py`) |
+| P2 | Portfolio verify + Atlas digest | **Done** (`verify_portfolio.sh`, `atlas_portfolio_digest.sh`) |
 
 ---
 

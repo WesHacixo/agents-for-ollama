@@ -7,6 +7,8 @@ from agents_ollama.checkpoint import (
     write_session_checkpoint,
 )
 from agents_ollama.goal_verify import GoalVerdict, parse_goal_verdict_line, verify_goal
+from agents_ollama.max_mode_lite import MaxModeLiteResult, run_max_mode_lite
+from agents_ollama.sigmem0_recall import recall_sigmem0_context
 from agents_ollama.client import (
     OllamaSettings,
     build_agent,
@@ -26,6 +28,8 @@ __all__ = [
     "GoalVerdict",
     "parse_goal_verdict_line",
     "verify_goal",
+    "MaxModeLiteResult",
+    "run_max_mode_lite",
     "new_return_id",
     "recall_sigmem0_context",
     "SessionCheckpoint",

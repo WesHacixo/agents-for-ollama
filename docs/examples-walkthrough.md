@@ -144,6 +144,14 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | Fast-model YES/NO on hint satisfaction before `build_cas_return_packet` |
 | **Expected** | CAS JSON only when goal satisfied; exit 2 on gap |
 
+### `15_max_mode_lite.py` — parallel candidates + judge (Phase 8)
+
+| Piece | Value |
+|-------|-------|
+| Model | 3× `gemma2:2b` candidates + `gemma4:12b-mlx` judge |
+| Pattern | `asyncio.gather` candidates → judge picks winner → CAS return |
+| **Expected** | `winner=N` line + CAS packet with `max_mode_lite` action stamp |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
@@ -153,6 +161,7 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | `checkpoint.py` | `write_session_checkpoint`, `build_checkpoint_cas_return` (Phase 6) |
 | `sigmem0_recall.py` | `recall_sigmem0_context` — read-only recall with fixture fallback (Phase 7) |
 | `goal_verify.py` | `verify_goal` — fast-model goal guard before CAS emit (Phase 8) |
+| `max_mode_lite.py` | `run_max_mode_lite` — parallel candidates + judge (Phase 8) |
 | `cas_runner.py` | `run_cas_return`, `emit_cas_return` for subprocess CLI |
 | `mvp_slice.py` | Self-explaining taste → propose → validate demo |
 | `cli.py` | `agents-ollama-chat`, `agents-ollama-verify`, `agents-ollama-cas-return` |
@@ -165,7 +174,7 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, session checkpoints, SigMem0 recall, and goal verification are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`14`.
+Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, session checkpoints, SigMem0 recall, goal verification, and Max Mode lite are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`15`.
 
 ## Suggested learning order
 

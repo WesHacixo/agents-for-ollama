@@ -113,10 +113,11 @@ Verify path now emits:
 | P2 | Publish `public_safe` schema slice to `docs.bluehand.dev` index | **Done locally** (`public_safe_slice_v0.json` + doc) |
 | P2 | Add C067 witness fixture in `fixtures/detached_membrane/` | **Done** (`c067_boundary_witness_v0.json`) |
 | P3 | Optional `parent_receipt_id` chaining across multi-step membrane ops | **Done** (`receipt_chain.py`, `--chain-receipts`) |
-| P3 | Atlas sibling registration for agents-for-ollama on docs index | **Done locally** (`atlas-sibling-registration.md` + fixture) |
-| — | Phase 7 SigMem0 recall tool (`13_sigmem0_recall_agent.py`) | **Done** |
+| P3 | Atlas sibling registration for agents-for-ollama on docs index | **Done** (Atlas bridge + BHOK ATLAS seam) |
 | — | Phase 8 goal verification (`14_goal_verify.py`) | **Done** |
+| — | Phase 8 Max Mode lite (`15_max_mode_lite.py`) | **Done** |
 | — | Portfolio verify loop (`verify_portfolio.sh`) | **Done** |
+| — | Atlas portfolio digest (`atlas_portfolio_digest.sh`) | **Done** |
 
 ---
 

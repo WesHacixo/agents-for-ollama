@@ -37,3 +37,9 @@ fi
 
 echo
 echo "PASS: portfolio verify loop complete."
+
+if [[ -n "${AGENTS_FOR_OLLAMA_ROOT:-}" ]] || [[ -f "$ROOT/scripts/atlas_portfolio_digest.sh" ]]; then
+  echo
+  echo "== portfolio digest (Atlas orientation) =="
+  "$ROOT/scripts/atlas_portfolio_digest.sh"
+fi

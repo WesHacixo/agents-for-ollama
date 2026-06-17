@@ -90,6 +90,13 @@ CLI: `agents-ollama-cas-return` · Details: [cas-return-bridge.md](../cas-return
 
 Optional harness recall env: `SIGMEM0_RECALL_SESSION_ID`, `SIGMEM0_RECALL_CONVERSATIONS_PATH`, `SIGMEM0_LANCEDB_URI`.
 
+Atlas orientation digest:
+
+```bash
+./scripts/atlas_portfolio_digest.sh   # JSON witness for portfolio ATLAS compile
+./scripts/verify_portfolio.sh         # reflexive gate + digest tail
+```
+
 ## MacOS-CAS doc index (inference + agents)
 
 - [Inference router v0.1](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/inference-router-v0.1.md)
