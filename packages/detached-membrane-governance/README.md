@@ -10,12 +10,16 @@ From this directory:
 
 ```bash
 bun install
+bun run membrane:local-gate              # canonical governance gate (from repo: ./scripts/membrane_local_gate.sh)
+bun run membrane:local-gate --strict-legality
+MEMBRANE_GATE_QUICK=1 bun run membrane:local-gate   # skip e2e + python sdk tests
 bun run membrane:validate          # typecheck + vitest
 bun run membrane:compile-policy
 bun run membrane:verify-manifest
 bun run membrane:refresh-manifest  # after intentional manifest edits
 bun run membrane:verify-policy
 bun run membrane:governance-e2e
+bun run membrane:portfolio-digest
 bun run membrane:ztna issue --identity-ref detached_membrane_agent_local \
   --action membrane_propose --resource cas_return_packet \
   --context-ref cas1_test --out /tmp/ztna.json

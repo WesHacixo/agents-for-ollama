@@ -161,6 +161,17 @@ Upgrade applied:
 
 **Benefit:** contract spine integrity and offline governance truth path without live host dependencies.
 
+### Loop 6 — from “bash spine” to `membrane:local-gate` (Phase B)
+
+Upgrade applied:
+
+- `bun run membrane:local-gate` — single TS entry: compile → manifest → policy → leak → ztna → e2e → vitest → python sdk tests
+- `./scripts/membrane_local_gate.sh` wired into `verify_portfolio.sh` and `membrane_quality_gate.sh`
+- `MEMBRANE_GATE_QUICK=1` skips governance e2e + python sdk tests (dev feedback)
+- Portfolio digest via `membrane:portfolio-digest` (no re-run of gates inside digest)
+
+**Benefit:** one canonical governance truth path aligned with BIS-CP0 `local:gate`.
+
 ---
 
 ## How your primary coding agent should reason
@@ -205,9 +216,8 @@ Useful flags:
 Governance gate (run before extracting or promoting membrane core changes):
 
 ```bash
-./scripts/membrane_quality_gate.sh --strict-legality
-./scripts/membrane_governance_e2e.sh   # fixture-only; no Ollama/MacOS-CAS
-./scripts/verify_portfolio.sh          # gate + e2e + unit tests + optional smoke
+./scripts/membrane_local_gate.sh --strict-legality
+./scripts/verify_portfolio.sh          # local gate + unit tests + optional smoke
 ```
 
 ---

@@ -124,10 +124,11 @@ Verify path now emits:
 | — | BIS-CP0 alignment doc | **Done** (`portfolio-integration/bis-cp0-pattern-alignment.md`) |
 | **P1** | TS governance package (`detached-membrane-governance`) | **Done (Phase A)** — `packages/detached-membrane-governance`, `./scripts/membrane_ts_validate.sh` |
 | **P1** | Golden gate fixtures + negative vectors (TDD) | **Done** — [#7](https://github.com/WesHacixo/agents-for-ollama/issues/7) |
-| **P2** | Bun `membrane:local-gate` replaces bash governance spine | **Planned** — [#3](https://github.com/WesHacixo/agents-for-ollama/issues/3) |
+| **P2** | Bun `membrane:local-gate` replaces bash governance spine | **Done** — [#3](https://github.com/WesHacixo/agents-for-ollama/issues/3) `./scripts/membrane_local_gate.sh` |
 | **P2** | AST leak gate (replace `rg`) | **Planned** — [#4](https://github.com/WesHacixo/agents-for-ollama/issues/4) |
 | **P2** | Zod contracts + JSON Schema codegen | **Planned** — [#5](https://github.com/WesHacixo/agents-for-ollama/issues/5) |
-| **P3** | ZTNA consolidate to TS canonical | **In progress (A.2)** — TS `membrane:ztna` CLI; Python wrapper remains until Phase B [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
+| **P3** | ZTNA consolidate to TS canonical | **Done (Phase B)** — local gate uses TS ZTNA; `ztna_decide_local.py` legacy [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
+| **P2** | Portfolio digest TS CLI | **Done** — [#9](https://github.com/WesHacixo/agents-for-ollama/issues/9) `membrane:portfolio-digest` |
 | **P3** | Optional `agents-ollama-ts` executor lane | **Backlog** — [#6](https://github.com/WesHacixo/agents-for-ollama/issues/6) (founder-triggered) |
 
 ---
@@ -135,11 +136,10 @@ Verify path now emits:
 ## Operator checks
 
 ```bash
-./scripts/membrane_ts_validate.sh              # Phase A TS governance (bun + vitest)
-./scripts/membrane_quality_gate.sh --strict-legality
-./scripts/membrane_governance_e2e.sh          # fixture-only governance loop
-./scripts/verify_portfolio.sh                 # gate + e2e + unit tests + optional smoke
-./scripts/membrane_ops.sh --allow-degraded   # when Ollama/Mac host available
+./scripts/membrane_local_gate.sh --strict-legality   # canonical TS governance gate
+./scripts/membrane_ts_validate.sh                    # typecheck + vitest only
+./scripts/verify_portfolio.sh                      # local gate + unit tests + optional smoke
+./scripts/membrane_ops.sh --allow-degraded         # when Ollama/Mac host available
 ```
 
 Atlas oracles (sibling):

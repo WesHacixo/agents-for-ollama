@@ -30,11 +30,7 @@ export function compilePolicy(root: string = REPO_ROOT): string {
     schema_assertions: policy.schema_assertions ?? {},
     authority_class_requirements: policy.authority_class_requirements ?? {},
   };
-  writeFileSync(
-    join(genDir, "schema_constraints.json"),
-    `${JSON.stringify(schemaConstraints, null, 2)}\n`,
-    "utf-8",
-  );
+  writeFileSync(join(genDir, "schema_constraints.json"), JSON.stringify(schemaConstraints, null, 2), "utf-8");
 
   const verificationAssertions = {
     policy_id: policy.policy_id,
@@ -45,7 +41,7 @@ export function compilePolicy(root: string = REPO_ROOT): string {
   };
   writeFileSync(
     join(genDir, "verification_assertions.json"),
-    `${JSON.stringify(verificationAssertions, null, 2)}\n`,
+    JSON.stringify(verificationAssertions, null, 2),
     "utf-8",
   );
 
