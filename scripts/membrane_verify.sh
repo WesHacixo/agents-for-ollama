@@ -32,7 +32,12 @@ ACK_JSON="${TMPDIR:-/tmp}/detached-membrane-ack.json"
 
 python3 - <<PY
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, "$ROOT/packages/detached_membrane_sdk")
+from detached_membrane_sdk.bhrt_projection import project_bhrt_packet
+from detached_membrane_sdk.pim0_emit import emit_pim0_from_proposal
 import subprocess
 
 ack = json.loads(Path("$ACK_JSON").read_text(encoding="utf-8"))
@@ -64,6 +69,10 @@ if verify_proc.returncode != 0:
 if "$STRICT_LEGALITY" == "true":
     if packet.get("status") != "proposed":
         raise SystemExit("FAIL: strict legality requires status=proposed")
+    if packet.get("authority_status") != "advisory_only":
+        raise SystemExit("FAIL: strict legality requires authority_status=advisory_only")
+    if packet.get("execution_permitted") is not False:
+        raise SystemExit("FAIL: strict legality requires execution_permitted=false")
     if not packet.get("source_packet_id"):
         raise SystemExit("FAIL: strict legality requires source_packet_id")
     if not packet.get("actions_taken"):
@@ -79,31 +88,26 @@ result = {
     "accepted": bool(ack.get("accepted", False)),
     "errors": ack.get("errors", []),
     "status": packet.get("status"),
+    "authority_status": packet.get("authority_status", "advisory_only"),
+    "execution_permitted": bool(packet.get("execution_permitted", False)),
     "executor_profile_id": packet.get("executor_profile_id"),
     "policy_decision_ref": ztna.get("policy_decision_ref"),
 }
 
 print(json.dumps(result, indent=2))
 
-bhrt_projection = {
-    "object": "BHRTDetachedMembraneProjection",
-    "schema_version": "bhrt-projection-0_1",
-    "authority": {
-        "authority_class": "proposal",
-        "policy_decision_ref": ztna.get("policy_decision_ref"),
-    },
-    "lineage": {
-        "source_packet_id": packet.get("source_packet_id"),
-        "return_id": packet.get("return_id"),
-    },
-    "coverage_snapshot": {
-        "actions_taken_count": len(packet.get("actions_taken", [])),
-        "artifacts_count": len(packet.get("artifacts", [])),
-    },
-    "state_delta_refs": packet.get("artifacts", []),
-    "external_lineage_refs": [ztna.get("policy_decision_ref")],
-}
+pim0_envelope = emit_pim0_from_proposal(packet=packet)
+bhrt_projection = project_bhrt_packet(
+    packet=packet,
+    verification=result,
+    ztna=ztna,
+    pim0_envelope=pim0_envelope,
+    parent_receipt_id=ztna.get("policy_decision_ref"),
+)
 Path("$BHRTPROJ").write_text(json.dumps(bhrt_projection, indent=2), encoding="utf-8")
+Path("${TMPDIR:-/tmp}/detached-membrane-pim0-envelope.json").write_text(
+    json.dumps(pim0_envelope, indent=2), encoding="utf-8"
+)
 if result["accepted"]:
     raise SystemExit(0)
 raise SystemExit(1)

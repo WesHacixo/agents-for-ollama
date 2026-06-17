@@ -7,8 +7,10 @@ from pathlib import Path
 from detached_membrane_sdk import (
     adapt_event_envelope,
     bridge_verification_result,
+    emit_pim0_from_proposal,
     emit_proposal_packet,
     format_receipt,
+    project_bhrt_packet,
 )
 
 
@@ -46,8 +48,40 @@ class DetachedMembraneSdkTests(unittest.TestCase):
         self.assertEqual(packet["object"], "CASReturnPacket")
         self.assertEqual(packet["schema_version"], "cas-return-0_1")
         self.assertEqual(packet["status"], "proposed")
+        self.assertEqual(packet["authority_status"], "advisory_only")
+        self.assertFalse(packet["execution_permitted"])
         self.assertEqual(packet["source_packet_id"], "cas1_example_001")
         self.assertGreaterEqual(len(packet["artifacts"]), 1)
+
+    def test_bhrt_projection_alignment(self) -> None:
+        packet = emit_proposal_packet(
+            source_packet_id="cas1_example_004",
+            executor_profile_id="python_agents_sdk",
+            summary="BHRT projection alignment",
+        )
+        projection = project_bhrt_packet(
+            packet=packet,
+            verification={"accepted": True},
+            ztna={"policy_decision_ref": "ztna_decision_test"},
+            parent_receipt_id="ztna_decision_test",
+        )
+        self.assertEqual(projection["authority_status"], "advisory_only")
+        self.assertFalse(projection["execution_permitted"])
+        self.assertIn("layering_chain", projection)
+        self.assertIn("lane_separation", projection)
+        self.assertEqual(projection["lineage"]["parent_receipt_id"], "ztna_decision_test")
+
+    def test_emit_pim0_from_proposal(self) -> None:
+        packet = emit_proposal_packet(
+            source_packet_id="cas1_example_005",
+            executor_profile_id="python_agents_sdk",
+            summary="PIM0 envelope emit",
+        )
+        envelope = emit_pim0_from_proposal(packet=packet)
+        self.assertEqual(envelope["envelope_version"], "PIM0_EVENT_ENVELOPE_V1")
+        self.assertEqual(envelope["source_object_type"], "CASReturnPacket")
+        self.assertEqual(envelope["authority_class"], "presentation_only")
+        self.assertFalse(envelope["mutation_allowed"])
 
     def test_bridge_and_receipt(self) -> None:
         packet = emit_proposal_packet(

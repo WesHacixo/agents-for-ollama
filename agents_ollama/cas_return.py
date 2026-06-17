@@ -40,6 +40,8 @@ def build_cas_return_packet(
         "executor_family": "local_model_runtime",
         "executor_lane": "local_model",
         "status": status,
+        "authority_status": "advisory_only",
+        "execution_permitted": False,
         "actions_taken": [
             f"summarize:{hint_label}",
             f"agent_output:{summary_action}",

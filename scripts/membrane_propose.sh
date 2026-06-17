@@ -87,6 +87,8 @@ packet["ztna"] = {
     "policy_decision_ref": ztna.get("decision_ref"),
     "decision_ttl_seconds": 900,
     "receipt_path": "$ZTNA_RECEIPT",
+    "authority_status": "advisory_only",
+    "execution_permitted": False,
 }
 Path("$OUT_JSON").write_text(json.dumps(packet), encoding="utf-8")
 

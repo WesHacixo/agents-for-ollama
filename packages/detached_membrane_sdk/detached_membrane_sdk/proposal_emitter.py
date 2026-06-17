@@ -45,11 +45,22 @@ def emit_proposal_packet(
         "executor_family": "local_model_runtime",
         "executor_lane": "local_model",
         "status": "proposed",
+        "authority_status": "advisory_only",
+        "execution_permitted": False,
         "actions_taken": actions,
         "artifacts": artifact_values,
         "validation": {"commands_run": [], "result": "not_run"},
         "deviations_from_scope": ["proposal_only:no_host_apply"],
-        "risks": ["requires_host_validation"],
+        "risks": [
+            "requires_host_validation",
+            "output_is_proposal_only",
+        ],
         "proposed_next_state": {"macos_session_status": "running"},
         "writeback_proposal": {"sigmem0": "none", "rationale": ""},
+        "layering_chain": [
+            "agents_for_ollama_executor",
+            "macos_cas_validate",
+            "bhrt_projection",
+            "pim0_envelope_index",
+        ],
     }
