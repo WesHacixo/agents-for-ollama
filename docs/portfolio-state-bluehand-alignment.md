@@ -114,6 +114,7 @@ Verify path now emits:
 | P2 | Add C067 witness fixture in `fixtures/detached_membrane/` | **Done** (`c067_boundary_witness_v0.json`) |
 | P3 | Optional `parent_receipt_id` chaining across multi-step membrane ops | Open |
 | P3 | Atlas sibling registration for agents-for-ollama on docs index | Open |
+| — | Phase 7 SigMem0 recall tool (`13_sigmem0_recall_agent.py`) | **Done** |
 
 ---
 

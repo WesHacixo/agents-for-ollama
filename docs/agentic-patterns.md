@@ -246,7 +246,8 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | 4 | MacOS-CAS subprocess executor + host apply | ✅ Done |
 | 5 | LLM guardrails example (`11`) | ✅ Done |
 | 6 | Long-horizon session checkpoint | `12_session_checkpoint.py`, `agents_ollama/checkpoint.py` | **Shipped** (proposal-only CAS checkpoint) |
-| 7+ | SigMem0 recall, Atlas registration | See [agentic-proposal-v0.2.md](agentic-proposal-v0.2.md) |
+| 7 | SigMem0 recall tool | `13_sigmem0_recall_agent.py`, `agents_ollama/sigmem0_recall.py` | **Shipped** (fixture fallback, `wired_read_only`) |
+| 8+ | Goal verify, Atlas registration | See [agentic-proposal-v0.2.md](agentic-proposal-v0.2.md) |
 
 ---
 

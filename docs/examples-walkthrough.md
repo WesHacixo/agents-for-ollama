@@ -128,6 +128,14 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | Multi-step tool loop → writer-only `SessionCheckpoint` → `CASReturnPacket` |
 | **Expected** | Pretty-printed packet with `proposed_next_state.session_checkpoint` |
 
+### `13_sigmem0_recall_agent.py` — SigMem0 recall tool (Phase 7)
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` |
+| Pattern | `@function_tool recall_sigmem0` → live export or fixture (`wired_read_only`) |
+| **Expected** | Answer grounded in recall lines; fixture works when `:8741` is down |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
@@ -135,6 +143,7 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | `client.py` | `OllamaSettings`, `build_ollama_client`, `build_ollama_model`, `build_agent` |
 | `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge |
 | `checkpoint.py` | `write_session_checkpoint`, `build_checkpoint_cas_return` (Phase 6) |
+| `sigmem0_recall.py` | `recall_sigmem0_context` — read-only recall with fixture fallback (Phase 7) |
 | `cas_runner.py` | `run_cas_return`, `emit_cas_return` for subprocess CLI |
 | `mvp_slice.py` | Self-explaining taste → propose → validate demo |
 | `cli.py` | `agents-ollama-chat`, `agents-ollama-verify`, `agents-ollama-cas-return` |
@@ -147,7 +156,7 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, and session checkpoints are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`12`.
+Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, session checkpoints, and SigMem0 recall are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`13`.
 
 ## Suggested learning order
 

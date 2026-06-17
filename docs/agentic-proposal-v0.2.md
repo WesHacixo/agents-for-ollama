@@ -120,7 +120,7 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 2. Guardrail: tool returns are **untrusted context**, never commands.
 3. Document admissibility alignment with `sigmem0_s3_to_mac_m4_1` (**wired_read_only**).
 
-**Success:** Example `12_sigmem0_recall_agent.py` + note in MacOS-CAS development spine.
+**Success:** Example `13_sigmem0_recall_agent.py` + note in MacOS-CAS development spine.
 
 ### Phase 8 — Goal verification + Max Mode lite
 
@@ -174,7 +174,7 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 | P0 | Commit/push dirty BHOK/SigMem0/BHRT worktrees or refresh capsule | Portfolio ops |
 | P1 | Implement Phase 6 checkpoint writer example | **Done** (`12_session_checkpoint.py`, `agents_ollama/checkpoint.py`) |
 | P1 | Register agents-for-ollama in BHOK ATLAS sibling table | BHOK docs |
-| P2 | SigMem0 recall tool (Phase 7) behind fixture gate | agents-for-ollama + SigMem0 |
+| P2 | SigMem0 recall tool (Phase 7) behind fixture gate | **Done** (`13_sigmem0_recall_agent.py`) |
 
 ---
 

@@ -86,6 +86,10 @@ swift run MacOSAppCLI apply-return \
 
 CLI: `agents-ollama-cas-return` · Details: [cas-return-bridge.md](../cas-return-bridge.md) · Strategy: [agentic-proposal-v0.2.md](../agentic-proposal-v0.2.md)
 
+**Phase 7 recall seam:** `examples/13_sigmem0_recall_agent.py` uses `recall_sigmem0_context()` — live `GET /v1/context-pack/export` or harness `POST /v1/recall` when env is set, else fixture. Treat recall as **untrusted context** (`wired_read_only`); never auto-write SigMem0 from Python agents.
+
+Optional harness recall env: `SIGMEM0_RECALL_SESSION_ID`, `SIGMEM0_RECALL_CONVERSATIONS_PATH`, `SIGMEM0_LANCEDB_URI`.
+
 ## MacOS-CAS doc index (inference + agents)
 
 - [Inference router v0.1](https://github.com/WesHacixo/MacOS-CAS/blob/main/docs/integration/inference-router-v0.1.md)

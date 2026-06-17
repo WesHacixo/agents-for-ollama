@@ -1,0 +1,19 @@
+{
+  "object": "SigMem0RecallStubV0",
+  "authority_status": "proposal_context_only",
+  "promotion_policy": "no_substrate_auto_write",
+  "evidence_limitations": [
+    "fixture: Phase 7 recall tool — not live SigMem0 harness or LanceDB"
+  ],
+  "matches": [
+    {
+      "summary": "Connect python_agents_sdk executor to morning handoff recall"
+    },
+    {
+      "summary": "Clear Atlas coherence after Mac harness smoke"
+    },
+    {
+      "summary": "SigMem0 wired_read_only: taste portfolio context before agent proposals"
+    }
+  ]
+}
