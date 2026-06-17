@@ -149,9 +149,9 @@ We **cannot** adopt MiMo’s free-form memory writes: MacOS-CAS and BHOK deny **
 
 ### Phase 10 — Optional cloud lane (MiMo-V2.5)
 
-**Out of scope for Ollama-only repo** but worth a **comparison doc**:
+**Out of scope for Ollama-only repo** — comparison doc shipped:
 
-- Same harness (`agents-ollama-cas-return` pattern) with `OPENAI_BASE_URL` → MiMo API for long-context A/B.
+- [cloud-lane-comparison.md](cloud-lane-comparison.md) — same `agents-ollama-cas-return` harness with `OLLAMA_BASE_URL` override for long-context A/B.
 - Keeps local Ollama as default; cloud for horizon experiments only.
 
 ---

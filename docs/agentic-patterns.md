@@ -249,7 +249,8 @@ Bridge spec: [MacOS-CAS agents-sdk-ollama-bridge-v0.1.md](https://github.com/Wes
 | 7 | SigMem0 recall tool | `13_sigmem0_recall_agent.py`, `agents_ollama/sigmem0_recall.py` | **Shipped** (fixture fallback, `wired_read_only`) |
 | 8 | Goal verification guard | `14_goal_verify.py`, `agents_ollama/goal_verify.py` | **Shipped** (fast-model YES/NO before CAS emit) |
 | 8b | Max Mode lite | `15_max_mode_lite.py`, `agents_ollama/max_mode_lite.py` | **Shipped** (3×2B candidates + 12B judge) |
-| 9 | Atlas + harness registration | Atlas bridge + BHOK ATLAS + digest script | **Shipped locally** |
+| 9 | Atlas + harness registration | Atlas bridge + BHOK ATLAS + digest script | **Shipped** |
+| 10 | Cloud lane comparison doc | [cloud-lane-comparison.md](cloud-lane-comparison.md) | **Shipped** (orientation only) |
 
 ---
 

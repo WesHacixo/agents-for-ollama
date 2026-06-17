@@ -118,6 +118,7 @@ Verify path now emits:
 | — | Phase 8 Max Mode lite (`15_max_mode_lite.py`) | **Done** |
 | — | Portfolio verify loop (`verify_portfolio.sh`) | **Done** |
 | — | Atlas portfolio digest (`atlas_portfolio_digest.sh`) | **Done** |
+| — | Phase 10 cloud lane comparison doc | **Done** (`cloud-lane-comparison.md`) |
 
 ---
 
