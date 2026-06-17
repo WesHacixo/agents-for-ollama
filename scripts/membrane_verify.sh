@@ -37,6 +37,7 @@ from pathlib import Path
 
 sys.path.insert(0, "$ROOT/packages/detached_membrane_sdk")
 from detached_membrane_sdk.bhrt_projection import project_bhrt_packet
+from detached_membrane_sdk.layered_verify import evaluate_layers
 from detached_membrane_sdk.pim0_emit import emit_pim0_from_proposal
 from detached_membrane_sdk.receipt_chain import (
     append_receipt_link,
@@ -90,16 +91,26 @@ if "$STRICT_LEGALITY" == "true":
     if ztna.get("decision_ttl_seconds", 0) <= 0:
         raise SystemExit("FAIL: strict legality requires positive decision_ttl_seconds")
 
+layered = evaluate_layers(
+    packet=packet,
+    ztna=ztna,
+    host_ack=ack,
+    ztna_verify_ok=verify_proc.returncode == 0,
+    strict_legality="$STRICT_LEGALITY" == "true",
+)
+host_accepted = bool(ack.get("accepted", False))
+
 result = {
     "object": "DetachedMembraneVerification",
     "packet_file": "$INPUT_JSON",
-    "accepted": bool(ack.get("accepted", False)),
+    "accepted": host_accepted and layered.get("accepted", False),
     "errors": ack.get("errors", []),
     "status": packet.get("status"),
     "authority_status": packet.get("authority_status", "advisory_only"),
     "execution_permitted": bool(packet.get("execution_permitted", False)),
     "executor_profile_id": packet.get("executor_profile_id"),
     "policy_decision_ref": ztna.get("policy_decision_ref"),
+    "layer_reasons": layered.get("layer_reasons", []),
 }
 
 print(json.dumps(result, indent=2))

@@ -10,9 +10,12 @@ from detached_membrane_sdk import (
     derive_wyrm_trace_ref,
     emit_pim0_from_proposal,
     emit_proposal_packet,
+    evaluate_layers,
     format_receipt,
     project_bhrt_packet,
+    verify_manifest,
 )
+from detached_membrane_sdk.governance_e2e import run_governance_e2e
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -156,6 +159,42 @@ class DetachedMembraneSdkTests(unittest.TestCase):
         self.assertIn("accepted", bridged)
         self.assertIn("errors", bridged)
         self.assertEqual(bridged["schema_version"], "detached-membrane-verify-0_1")
+
+    def test_layered_verify_reasons(self) -> None:
+        packet = emit_proposal_packet(
+            source_packet_id="cas1_layered_001",
+            executor_profile_id="python_agents_sdk",
+            summary="Layered verify",
+        )
+        packet["ztna"] = {
+            "policy_decision_ref": "ztna_layered_test",
+            "receipt_path": "/tmp/receipt.json",
+            "decision_ttl_seconds": 900,
+        }
+        layered = evaluate_layers(
+            packet=packet,
+            host_ack={"accepted": True, "errors": []},
+            ztna_verify_ok=True,
+            policy_assertions_ok=True,
+            strict_legality=True,
+        )
+        self.assertTrue(layered["accepted"])
+        self.assertEqual(len(layered["layer_reasons"]), 5)
+        self.assertTrue(all(layer["passed"] for layer in layered["layer_reasons"]))
+
+    def test_manifest_verify(self) -> None:
+        manifest_path = ROOT / "packages/detached_membrane_sdk/spec/detached-membrane-manifest.v1.json"
+        ok, reasons = verify_manifest(manifest_path, ROOT)
+        self.assertTrue(ok, msg="; ".join(reasons))
+        self.assertTrue(any("checksum match" in reason for reason in reasons))
+
+    def test_governance_e2e_fixture_loop(self) -> None:
+        report = run_governance_e2e(ROOT)
+        self.assertTrue(report["accepted"])
+        self.assertEqual(report["fixture_mode"], "no_ollama_no_macos_cas")
+        self.assertTrue(report["wyrm_trace_ref"].startswith("wyrm-"))
+        layered = report["layered_verification"]
+        self.assertTrue(layered["accepted"])
 
 
 if __name__ == "__main__":

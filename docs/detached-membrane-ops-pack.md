@@ -148,6 +148,19 @@ Upgrade applied: `scripts/compile_membrane_policy.sh` compiles one policy source
 
 **Benefit:** policy drift becomes mechanically detectable rather than human memory-dependent.
 
+### Loop 5 — CP0-inspired manifest + governance e2e (BIS-CP0 pattern alignment)
+
+Pattern source: [BIS-CP0](portfolio-integration/bis-cp0-pattern-alignment.md) (no runtime coupling).
+
+Upgrade applied:
+
+- `packages/detached_membrane_sdk/spec/detached-membrane-manifest.v1.json` with SHA256 artifact checksums
+- `./scripts/verify_membrane_manifest.sh` in quality gate
+- `./scripts/membrane_governance_e2e.sh` — fixture-only propose → ztna → layered verify (no Ollama, no MacOS-CAS)
+- `membrane_verify.sh` emits `layer_reasons` (L0–L4) for audit ergonomics
+
+**Benefit:** contract spine integrity and offline governance truth path without live host dependencies.
+
 ---
 
 ## How your primary coding agent should reason
@@ -193,6 +206,8 @@ Governance gate (run before extracting or promoting membrane core changes):
 
 ```bash
 ./scripts/membrane_quality_gate.sh --strict-legality
+./scripts/membrane_governance_e2e.sh   # fixture-only; no Ollama/MacOS-CAS
+./scripts/verify_portfolio.sh          # gate + e2e + unit tests + optional smoke
 ```
 
 ---
@@ -203,3 +218,4 @@ Governance gate (run before extracting or promoting membrane core changes):
 - [detached-membrane-boundary-spec.md](detached-membrane-boundary-spec.md)
 - [programmatic-intelligence-seams.md](programmatic-intelligence-seams.md)
 - [cas-return-bridge.md](cas-return-bridge.md)
+- [portfolio-integration/bis-cp0-pattern-alignment.md](portfolio-integration/bis-cp0-pattern-alignment.md)

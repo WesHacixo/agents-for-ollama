@@ -2,6 +2,8 @@
 
 from .bhrt_projection import derive_wyrm_trace_ref, project_bhrt_packet
 from .envelope_adapter import adapt_event_envelope
+from .layered_verify import evaluate_layers
+from .manifest import verify_manifest
 from .pim0_emit import emit_pim0_from_proposal
 from .proposal_emitter import emit_proposal_packet
 from .receipt_formatter import format_receipt
@@ -20,6 +22,8 @@ __all__ = [
     "derive_wyrm_trace_ref",
     "emit_proposal_packet",
     "emit_pim0_from_proposal",
+    "evaluate_layers",
+    "verify_manifest",
     "bridge_verification_result",
     "format_receipt",
     "project_bhrt_packet",

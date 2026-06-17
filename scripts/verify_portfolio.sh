@@ -12,6 +12,10 @@ echo "== portfolio verify: membrane quality gate =="
 ./scripts/membrane_quality_gate.sh --strict-legality
 
 echo
+echo "== portfolio verify: membrane governance e2e (fixture-only) =="
+./scripts/membrane_governance_e2e.sh
+
+echo
 echo "== portfolio verify: unit tests =="
 PYTHONPATH=packages/detached_membrane_sdk:. uv run python -m unittest discover -s tests -p 'test_*.py' -q
 

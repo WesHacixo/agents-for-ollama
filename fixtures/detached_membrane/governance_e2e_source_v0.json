@@ -1,0 +1,8 @@
+{
+  "object": "GovernanceE2ESourceFixture",
+  "schema_version": "governance-e2e-source-v0",
+  "source_packet_id": "cas1_governance_e2e_fixture_v0",
+  "executor_profile_id": "python_agents_sdk",
+  "identity_ref": "detached_membrane_agent_local",
+  "hint": "Fixture-only governance e2e proposal (no Ollama, no MacOS-CAS)"
+}

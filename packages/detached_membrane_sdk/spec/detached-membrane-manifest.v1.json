@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bluehand/detached-membrane-manifest.v1",
+  "title": "DetachedMembraneManifestV1",
+  "description": "Machine-readable layer map and contract checksum source for the detached membrane SDK. Human contract: docs/detached-membrane-boundary-spec.md. Verify: ./scripts/verify_membrane_manifest.sh",
+  "version": "v1",
+  "contract_id": "DETACHED-MEMBRANE-MANIFEST-V1",
+  "checksum_alg": "SHA256",
+  "checksum_note": "Computed over canonical JSON of artifacts array (path + per-file sha256, sorted by path). Run ./scripts/refresh_membrane_manifest_checksum.sh after intentional manifest edits.",
+  "declared_checksum": "6705d932c5e93f5d795b3abb4e34121719c5dbb9464cf49b83b346d8533c94bb",
+  "human_contract": "docs/detached-membrane-boundary-spec.md",
+  "pattern_source": "BIS-CP0 (pattern alignment only; no default runtime coupling)",
+  "layers": [
+    {
+      "id": "L0",
+      "name": "contracts",
+      "description": "CAS return, PIM0 envelope, verification, and public-safe slice schemas",
+      "primary_specs": [
+        "packages/detached_membrane_sdk/contracts/proposal_packet_schema.json",
+        "packages/detached_membrane_sdk/contracts/pim0_event_envelope_v1.json",
+        "packages/detached_membrane_sdk/contracts/verification_result_schema.json",
+        "packages/detached_membrane_sdk/contracts/public_safe_slice_v0.json"
+      ]
+    },
+    {
+      "id": "L1",
+      "name": "policy_compiler",
+      "description": "Uber-policy registry, source, and compiled assertions",
+      "primary_specs": [
+        "packages/detached_membrane_sdk/policy/policy_registry.yaml",
+        "packages/detached_membrane_sdk/policy/policy_source.json",
+        "packages/detached_membrane_sdk/policy/generated/schema_constraints.json",
+        "packages/detached_membrane_sdk/policy/generated/verification_assertions.json",
+        "packages/detached_membrane_sdk/policy/generated/leak_patterns.txt"
+      ]
+    },
+    {
+      "id": "L2",
+      "name": "ztna_gate",
+      "description": "Local ZTNA policy and receipt verification before propose",
+      "primary_specs": [
+        "packages/detached_membrane_sdk/policy/local_ztna_policy_v0.json"
+      ]
+    },
+    {
+      "id": "L3",
+      "name": "host_validation",
+      "description": "MacOS-CAS validate-return-packet (live) or fixture ack (governance e2e)",
+      "primary_fixtures": [
+        "fixtures/detached_membrane/macos_validator_ack_shape.json"
+      ]
+    },
+    {
+      "id": "L4",
+      "name": "lineage_projection",
+      "description": "BHRT projection, PIM0 emit, optional receipt chain",
+      "primary_code": [
+        "packages/detached_membrane_sdk/detached_membrane_sdk/bhrt_projection.py",
+        "packages/detached_membrane_sdk/detached_membrane_sdk/pim0_emit.py",
+        "packages/detached_membrane_sdk/detached_membrane_sdk/receipt_chain.py"
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "id": "INV.PROPOSAL.ONLY",
+      "text": "All membrane packets remain status=proposed with execution_permitted=false"
+    },
+    {
+      "id": "INV.ADVISORY.AUTHORITY",
+      "text": "authority_status must remain advisory_only across propose and verify paths"
+    },
+    {
+      "id": "INV.NO.HOST.APPLY",
+      "text": "deviations_from_scope must include proposal_only:no_host_apply"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "packages/detached_membrane_sdk/contracts/proposal_packet_schema.json",
+      "role": "contract"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/contracts/pim0_event_envelope_v1.json",
+      "role": "contract"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/contracts/verification_result_schema.json",
+      "role": "contract"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/contracts/public_safe_slice_v0.json",
+      "role": "contract"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/policy_registry.yaml",
+      "role": "policy"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/policy_source.json",
+      "role": "policy"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/local_ztna_policy_v0.json",
+      "role": "policy"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/generated/schema_constraints.json",
+      "role": "compiled_policy"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/generated/verification_assertions.json",
+      "role": "compiled_policy"
+    },
+    {
+      "path": "packages/detached_membrane_sdk/policy/generated/leak_patterns.txt",
+      "role": "compiled_policy"
+    }
+  ]
+}

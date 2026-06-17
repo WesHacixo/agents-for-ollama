@@ -37,6 +37,9 @@ echo "-- compile policy"
 echo "-- verify policy assertions"
 ./scripts/verify_membrane_policy.sh
 
+echo "-- verify manifest checksums"
+./scripts/verify_membrane_manifest.sh
+
 echo "-- leak gate"
 ./scripts/check_membrane_leaks.sh
 
