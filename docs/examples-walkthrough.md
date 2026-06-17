@@ -120,12 +120,21 @@ See [agentic-patterns.md](agentic-patterns.md) for the full pattern matrix. Run 
 | Pattern | LLM `@input_guardrail` before main agent |
 | **Expected** | Safe prompt runs; injection tripwire on bad input |
 
+### `12_session_checkpoint.py` — long-horizon checkpoint (Phase 6)
+
+| Piece | Value |
+|-------|-------|
+| Model | `gemma4:12b-mlx` worker + checkpoint writer |
+| Pattern | Multi-step tool loop → writer-only `SessionCheckpoint` → `CASReturnPacket` |
+| **Expected** | Pretty-printed packet with `proposed_next_state.session_checkpoint` |
+
 ## Shared module: `agents_ollama/`
 
 | Module | Purpose |
 |--------|---------|
 | `client.py` | `OllamaSettings`, `build_ollama_client`, `build_ollama_model`, `build_agent` |
 | `cas_return.py` | `build_cas_return_packet` for MacOS-CAS bridge |
+| `checkpoint.py` | `write_session_checkpoint`, `build_checkpoint_cas_return` (Phase 6) |
 | `cas_runner.py` | `run_cas_return`, `emit_cas_return` for subprocess CLI |
 | `mvp_slice.py` | Self-explaining taste → propose → validate demo |
 | `cli.py` | `agents-ollama-chat`, `agents-ollama-verify`, `agents-ollama-cas-return` |
@@ -138,7 +147,7 @@ from agents_ollama import build_agent, configure_ollama_runtime
 
 ## Extending to multi-agent workflows
 
-Handoffs, agent-as-tool, sessions, structured output, guardrails, and CAS returns are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`11`.
+Handoffs, agent-as-tool, sessions, structured output, guardrails, CAS returns, and session checkpoints are documented in [agentic-patterns.md](agentic-patterns.md) with examples `04`–`12`.
 
 ## Suggested learning order
 
