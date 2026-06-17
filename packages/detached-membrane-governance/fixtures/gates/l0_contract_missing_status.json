@@ -1,0 +1,28 @@
+{
+  "name": "l0_contract_missing_status",
+  "input": {
+    "packet": {
+      "object": "CASReturnPacket",
+      "status": "applied",
+      "authority_status": "advisory_only",
+      "execution_permitted": false,
+      "source_packet_id": "cas1_l0_fail",
+      "layering_chain": ["x"],
+      "actions_taken": ["y"]
+    },
+    "ztna": {
+      "policy_decision_ref": "ztna_decision_test",
+      "receipt_path": "/tmp/receipt.json",
+      "decision_ttl_seconds": 900
+    },
+    "hostAck": { "accepted": true, "errors": [] },
+    "ztnaVerifyOk": true,
+    "policyAssertionsOk": true,
+    "strictLegality": true
+  },
+  "expect": {
+    "accepted": false,
+    "failedLayerId": "L0",
+    "reasonContains": "proposal-only contract"
+  }
+}

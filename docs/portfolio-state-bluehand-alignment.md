@@ -122,12 +122,12 @@ Verify path now emits:
 | P2 | BIS-CP0 pattern alignment (manifest checksums, layered verify) | **Done** (`detached-membrane-manifest.v1.json`, `layered_verify.py`) |
 | P2 | Fixture-only governance e2e (no Ollama / MacOS-CAS) | **Done** (`membrane_governance_e2e.sh`) |
 | — | BIS-CP0 alignment doc | **Done** (`portfolio-integration/bis-cp0-pattern-alignment.md`) |
-| **P1** | TS governance package (`detached-membrane-governance`) | **Planned** — [Epic #1](https://github.com/WesHacixo/agents-for-ollama/issues/1), [Phase A #2](https://github.com/WesHacixo/agents-for-ollama/issues/2) |
-| **P1** | Golden gate fixtures + negative vectors (TDD) | **Planned** — [#7](https://github.com/WesHacixo/agents-for-ollama/issues/7) |
+| **P1** | TS governance package (`detached-membrane-governance`) | **Done (Phase A)** — `packages/detached-membrane-governance`, `./scripts/membrane_ts_validate.sh` |
+| **P1** | Golden gate fixtures + negative vectors (TDD) | **Done** — [#7](https://github.com/WesHacixo/agents-for-ollama/issues/7) |
 | **P2** | Bun `membrane:local-gate` replaces bash governance spine | **Planned** — [#3](https://github.com/WesHacixo/agents-for-ollama/issues/3) |
 | **P2** | AST leak gate (replace `rg`) | **Planned** — [#4](https://github.com/WesHacixo/agents-for-ollama/issues/4) |
 | **P2** | Zod contracts + JSON Schema codegen | **Planned** — [#5](https://github.com/WesHacixo/agents-for-ollama/issues/5) |
-| **P3** | ZTNA consolidate to TS canonical | **Planned** — [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
+| **P3** | ZTNA consolidate to TS canonical | **In progress (A.2)** — TS `membrane:ztna` CLI; Python wrapper remains until Phase B [#8](https://github.com/WesHacixo/agents-for-ollama/issues/8) |
 | **P3** | Optional `agents-ollama-ts` executor lane | **Backlog** — [#6](https://github.com/WesHacixo/agents-for-ollama/issues/6) (founder-triggered) |
 
 ---
@@ -135,6 +135,7 @@ Verify path now emits:
 ## Operator checks
 
 ```bash
+./scripts/membrane_ts_validate.sh              # Phase A TS governance (bun + vitest)
 ./scripts/membrane_quality_gate.sh --strict-legality
 ./scripts/membrane_governance_e2e.sh          # fixture-only governance loop
 ./scripts/verify_portfolio.sh                 # gate + e2e + unit tests + optional smoke

@@ -1,0 +1,24 @@
+{
+  "name": "l2_ztna_missing_receipt",
+  "input": {
+    "packet": {
+      "object": "CASReturnPacket",
+      "status": "proposed",
+      "authority_status": "advisory_only",
+      "execution_permitted": false,
+      "source_packet_id": "cas1_l2_fail",
+      "layering_chain": ["x"],
+      "actions_taken": ["y"]
+    },
+    "ztna": {},
+    "hostAck": { "accepted": true, "errors": [] },
+    "ztnaVerifyOk": false,
+    "policyAssertionsOk": true,
+    "strictLegality": true
+  },
+  "expect": {
+    "accepted": false,
+    "failedLayerId": "L2",
+    "reasonContains": "ztna"
+  }
+}

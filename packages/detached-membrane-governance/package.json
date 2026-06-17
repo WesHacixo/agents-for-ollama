@@ -1,0 +1,23 @@
+{
+  "name": "detached-membrane-governance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "membrane:validate": "bun run typecheck && bun run test",
+    "membrane:compile-policy": "bun src/cli.ts compile-policy",
+    "membrane:verify-manifest": "bun src/cli.ts verify-manifest",
+    "membrane:refresh-manifest": "bun src/cli.ts refresh-manifest",
+    "membrane:verify-policy": "bun src/cli.ts verify-policy",
+    "membrane:governance-e2e": "bun src/cli.ts governance-e2e",
+    "membrane:ztna": "bun src/cli.ts ztna"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

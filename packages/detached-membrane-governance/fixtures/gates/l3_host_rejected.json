@@ -1,0 +1,28 @@
+{
+  "name": "l3_host_rejected",
+  "input": {
+    "packet": {
+      "object": "CASReturnPacket",
+      "status": "proposed",
+      "authority_status": "advisory_only",
+      "execution_permitted": false,
+      "source_packet_id": "cas1_l3_fail",
+      "layering_chain": ["x"],
+      "actions_taken": ["y"]
+    },
+    "ztna": {
+      "policy_decision_ref": "ztna_decision_test",
+      "receipt_path": "/tmp/receipt.json",
+      "decision_ttl_seconds": 900
+    },
+    "hostAck": { "accepted": false, "errors": ["invalid_packet"] },
+    "ztnaVerifyOk": true,
+    "policyAssertionsOk": true,
+    "strictLegality": true
+  },
+  "expect": {
+    "accepted": false,
+    "failedLayerId": "L3",
+    "reasonContains": "host validator rejected"
+  }
+}

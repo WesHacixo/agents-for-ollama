@@ -117,6 +117,7 @@ Filter: [governance-ts issues](https://github.com/WesHacixo/agents-for-ollama/is
 
 ## Success criteria (epic complete)
 
+- [x] Phase A: `packages/detached-membrane-governance` with `bun run membrane:validate` (11 tests)
 - [ ] `bun run membrane:local-gate` replaces Python/bash governance spine in CI and `verify_portfolio.sh`
 - [ ] Python SDK leak gate still passes; no `subprocess` / execution markers in extractable core
 - [ ] Single ZTNA implementation; shell scripts call TS CLI
